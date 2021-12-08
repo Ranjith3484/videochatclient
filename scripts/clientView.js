@@ -996,22 +996,6 @@ function showModel(item) {
       );
       // show qr code as top layer
       if (path && showQR) {
-        const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
-        const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
-          scene,
-          (videoTexture) => {
-            videoTexture._invertY = false;
-            videoTexture;
-            videoLayer.texture = videoTexture;
-          },
-          {
-            minWidth: 640,
-            minHeight: 480,
-            maxWidth: 1920,
-            maxHeight: 1080,
-            deviceId: "",
-          }
-        );
        var plane = BABYLON.MeshBuilder.CreatePlane(
           "plane",
           { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
