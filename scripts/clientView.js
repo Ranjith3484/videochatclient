@@ -30,6 +30,7 @@ function startCallSession() {
         });
 
       signaling = new WebSocket("wss://videochat-app-bj.herokuapp.com");
+     
       setTimeout(function () {
         peerConnection = createPeerConnection();
         addMessageHandler();
@@ -66,7 +67,7 @@ function startCallSession() {
 
   const createPeerConnection = () => {
     const pc = new RTCPeerConnection({
-      iceServers: [{ urls: "stun:stun.m.test.com:19000" }],
+      iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
     });
 
     pc.onnegotiationneeded = async () => {
@@ -123,11 +124,10 @@ function startCallSession() {
   const addMessageHandler = () => {
     signaling.onmessage = async (message) => {
       const data = JSON.parse(message.data);
-
+      console.log(data,'-->')
       if (!data) {
         return;
       }
-
       const { message_type, content } = data;
       try {
         if (message_type === MESSAGE_TYPE.CANDIDATE && content) {
