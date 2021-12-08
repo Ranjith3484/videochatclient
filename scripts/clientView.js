@@ -804,40 +804,40 @@ var x = "white",
   y = 6.25;
 
 function init() {
-  canvas = document.getElementById("drawLine");
-  canvas.setAttribute("width", window.innerWidth / 1.2);
-  ctx = canvas.getContext("2d");
-  w = canvas.width;
-  h = canvas.height;
+  // canvas = document.getElementById("drawLine");
+  // canvas.setAttribute("width", window.innerWidth / 1.2);
+  // ctx = canvas.getContext("2d");
+  // w = canvas.width;
+  // h = canvas.height;
 
-  canvas.addEventListener(
-    "mousemove",
-    function (e) {
-      findxy("move", e);
-    },
-    false
-  );
-  canvas.addEventListener(
-    "mousedown",
-    function (e) {
-      findxy("down", e);
-    },
-    false
-  );
-  canvas.addEventListener(
-    "mouseup",
-    function (e) {
-      findxy("up", e);
-    },
-    false
-  );
-  canvas.addEventListener(
-    "mouseout",
-    function (e) {
-      findxy("out", e);
-    },
-    false
-  );
+  // canvas.addEventListener(
+  //   "mousemove",
+  //   function (e) {
+  //     findxy("move", e);
+  //   },
+  //   false
+  // );
+  // canvas.addEventListener(
+  //   "mousedown",
+  //   function (e) {
+  //     findxy("down", e);
+  //   },
+  //   false
+  // );
+  // canvas.addEventListener(
+  //   "mouseup",
+  //   function (e) {
+  //     findxy("up", e);
+  //   },
+  //   false
+  // );
+  // canvas.addEventListener(
+  //   "mouseout",
+  //   function (e) {
+  //     findxy("out", e);
+  //   },
+  //   false
+  // );
 }
 
 //change annotate color
@@ -996,26 +996,41 @@ function showModel(item) {
       );
       // show qr code as top layer
       if (path && showQR) {
-        
-      //  var plane = BABYLON.MeshBuilder.CreatePlane(
-      //     "plane",
-      //     { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
-      //     scene
-      //   );
-      //   var mat = new BABYLON.StandardMaterial("", scene);
-      //   mat.diffuseTexture = new BABYLON.Texture(path, scene);
-      //    plane.material = mat;
+        const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
+        const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
+          scene,
+          (videoTexture) => {
+            videoTexture._invertY = false;
+            videoTexture;
+            videoLayer.texture = videoTexture;
+          },
+          {
+            minWidth: 640,
+            minHeight: 480,
+            maxWidth: 1920,
+            maxHeight: 1080,
+            deviceId: "",
+          }
+        );
+       var plane = BABYLON.MeshBuilder.CreatePlane(
+          "plane",
+          { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
+          scene
+        );
+        var mat = new BABYLON.StandardMaterial("", scene);
+        mat.diffuseTexture = new BABYLON.Texture(path, scene);
+         plane.material = mat;
 
-      //   plane.scaling.z = 0.01;
-      //   plane.position.z = 10;
-      //   plane.position.y = 0;
-      //   plane.position.x = -3;
+        plane.scaling.z = 0.01;
+        plane.position.z = 10;
+        plane.position.y = 0;
+        plane.position.x = -3;
 
-      //   plane.parent = camera;
-      //   camera.minZ = 0;
+        plane.parent = camera;
+        camera.minZ = 0;
 
-      //   //move the 3d model away from qr to avoid overlay of 3d model over qr
-      //  document.getElementById("showSimInsert").click();
+        //move the 3d model away from qr to avoid overlay of 3d model over qr
+       document.getElementById("showSimInsert").click();
       } else {
         // show only video
         const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
