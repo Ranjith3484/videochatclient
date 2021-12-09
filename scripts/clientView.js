@@ -731,11 +731,16 @@ function changeVariant(item) {
 }
 
 function shareDevice() {
-  openCloseNav();
   showModel({
     path: localStorage.getItem("showingDeviceQRLink"),
     showQR: true,
   });
+  document.getElementById(localStorage.getItem("showingDeviceVariant"))
+  showModel({
+    path: localStorage.getItem("showingDeviceQRLink"),
+    showQR: true,
+  });
+  openCloseNav();
 }
 
 //clearing local storage item
