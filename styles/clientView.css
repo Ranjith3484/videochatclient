@@ -238,9 +238,9 @@ th{
     margin: 0px;
     padding: 0px;
     border: 0;
-    transform: rotateY(180deg);
+     transform: rotateY(180deg);
     -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg); 
+    -moz-transform:rotateY(180deg);  
     object-fit: cover !important;
 }
 
@@ -250,9 +250,9 @@ th{
     margin: 0px;
     padding: 0px;
     border: 0;
-    transform: rotateY(180deg);
+     transform: rotateY(180deg);
     -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg); 
+    -moz-transform:rotateY(180deg);  
     object-fit: cover !important;
 }
 
@@ -260,9 +260,9 @@ th{
 #clientVideoElement {
     height: 100%;
     width: 100%; 
-    transform: rotateY(180deg);
+    /* transform: rotateY(180deg);
     -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg); 
+    -moz-transform:rotateY(180deg);  */
     object-fit: cover
 }
 

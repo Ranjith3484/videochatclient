@@ -30,7 +30,7 @@ function startCallSession() {
         });
 
       signaling = new WebSocket("wss://videochat-app-bj.herokuapp.com");
-     
+
       setTimeout(function () {
         peerConnection = createPeerConnection();
         addMessageHandler();
@@ -124,7 +124,7 @@ function startCallSession() {
   const addMessageHandler = () => {
     signaling.onmessage = async (message) => {
       const data = JSON.parse(message.data);
-      console.log(data,'-->')
+      console.log(data, "-->");
       if (!data) {
         return;
       }
@@ -809,7 +809,6 @@ function init() {
   // ctx = canvas.getContext("2d");
   // w = canvas.width;
   // h = canvas.height;
-
   // canvas.addEventListener(
   //   "mousemove",
   //   function (e) {
@@ -945,7 +944,7 @@ function showModel(item) {
       new BABYLON.Vector3(0, 1, -15),
       scene
     );
-    // // Add lights to the scene
+    // Add lights to the scene
     var light1 = new BABYLON.HemisphericLight(
       "light1",
       new BABYLON.Vector3(1, 1, 0),
@@ -954,11 +953,11 @@ function showModel(item) {
     light1.intensity = 2;
 
     // This attaches the camera to the canvas
-    camera.attachControl(modelCanvas, true);
+    camera.attachControl(modelCanvas, false);
     if (path && !showQR) {
       // show 3d model as top layer
-     BABYLON.SceneLoader.Append("./", path, scene, function (scene) {
-        scene.createDefaultCameraOrLight(true, true, true);
+      BABYLON.SceneLoader.Append("./", path, scene, function (scene) {
+         scene.createDefaultCameraOrLight(true, true, true);
         const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
         const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
           scene,
@@ -996,14 +995,14 @@ function showModel(item) {
       );
       // show qr code as top layer
       if (path && showQR) {
-       var plane = BABYLON.MeshBuilder.CreatePlane(
+        var plane = BABYLON.MeshBuilder.CreatePlane(
           "plane",
           { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
           scene
         );
         var mat = new BABYLON.StandardMaterial("", scene);
         mat.diffuseTexture = new BABYLON.Texture(path, scene);
-         plane.material = mat;
+        plane.material = mat;
 
         plane.scaling.z = 0.01;
         plane.position.z = 10;
@@ -1014,7 +1013,7 @@ function showModel(item) {
         camera.minZ = 0;
 
         //move the 3d model away from qr to avoid overlay of 3d model over qr
-       document.getElementById("showSimInsert").click();
+        document.getElementById("showSimInsert").click();
       } else {
         // show only video
         const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
@@ -1024,7 +1023,6 @@ function showModel(item) {
             videoTexture._invertY = false;
             videoTexture;
             videoLayer.texture = videoTexture;
-            
           },
           {
             minWidth: 640,
