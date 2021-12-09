@@ -927,7 +927,6 @@ function showModel(item) {
   var path = item.path;
   var showQR = item.showQR;
   const expandable = item.path.search("ZFlip");
-  console.log(expandable,'-090')
   //show 3d model
   const modelCanvas = document.getElementById("render3DModel"); // Get the canvas element
   modelCanvas.setAttribute("width", window.innerWidth);
@@ -1043,7 +1042,9 @@ function showModel(item) {
         );
       }
     }
-    scene.clearColor = new BABYLON.Color4(0, 0, 0, 0.0000000000000001);
+    // scene.clearColor = new BABYLON.Color4(0, 0, 0, 0.0000000000000001);
+    scene.clearColor = new BABYLON.Color4(1, 1, 1, 1);
+scene.autoClear = true
 
     return scene;
   };
