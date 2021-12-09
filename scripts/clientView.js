@@ -231,7 +231,7 @@ function openCloseFeatures() {
   } else {
     //hiding features container
     document.getElementById("myFeaturesHolder").classList.add("hideElement");
-    document.getElementById("drawLine").style.pointerEvents = "none";
+    // document.getElementById("drawLine").style.pointerEvents = "none";
   }
 }
 
@@ -763,10 +763,10 @@ function openFeatureTab(evt, tabName) {
   //changing the height of feature holder
   if (tabName === "camera") {
     document.getElementById("myFeaturesHolder").style.height = "40%";
-    document.getElementById("drawLine").style.pointerEvents = "none";
+    // document.getElementById("drawLine").style.pointerEvents = "none";
   } else {
     document.getElementById("myFeaturesHolder").style.height = "26%";
-    document.getElementById("drawLine").style.pointerEvents = "all";
+    // document.getElementById("drawLine").style.pointerEvents = "all";
   }
 }
 
@@ -926,6 +926,8 @@ showModel({
 function showModel(item) {
   var path = item.path;
   var showQR = item.showQR;
+  const expandable = item.path.search("ZFlip");
+  console.log(expandable,'-090')
   //show 3d model
   const modelCanvas = document.getElementById("render3DModel"); // Get the canvas element
   modelCanvas.setAttribute("width", window.innerWidth);
@@ -958,6 +960,13 @@ function showModel(item) {
       // show 3d model as top layer
       BABYLON.SceneLoader.Append("./", path, scene, function (scene) {
          scene.createDefaultCameraOrLight(true, true, true);
+         scene.activeCamera.alpha = Math.PI / 2;
+         //change raduis for expandable and non expandable phone
+         if(expandable !== -1){
+          scene.activeCamera.radius = 0.5;
+         }else{
+          scene.activeCamera.radius = 7;
+         }
         const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
         const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
           scene,
@@ -1059,8 +1068,11 @@ function showModel(item) {
       var cam = scene.activeCamera;
       cam.alpha = 1.429;
       cam.beta = 1.63;
-      // cam.radius = 2.45;
-      cam.radius = 7;
+      if(expandable !== -1){
+        scene.activeCamera.radius = 0.5;
+       }else{
+        scene.activeCamera.radius = 7;
+       }
     });
 
   // Watch for back camera click events
@@ -1069,9 +1081,12 @@ function showModel(item) {
     .addEventListener("click", function () {
       var cam = scene.activeCamera;
       cam.alpha = -1.57;
-      cam.beta = 1.57; // 1.57
-      // cam.radius = 2.45;
-      cam.radius = 7;
+      cam.beta = 1.57; 
+      if(expandable !== -1){
+        scene.activeCamera.radius = 0.5;
+       }else{
+        scene.activeCamera.radius = 7;
+       }
     });
 
   // Watch for sim insert click events
@@ -1081,8 +1096,11 @@ function showModel(item) {
       var cam = scene.activeCamera;
       cam.alpha = 0.09;
       cam.beta = 1.57;
-      // cam.radius = 2.45;
-      cam.radius = 7;
+      if(expandable !== -1){
+        scene.activeCamera.radius = 0.5;
+       }else{
+        scene.activeCamera.radius = 7;
+       }
     });
 
   // Watch for charging port click events
@@ -1091,9 +1109,12 @@ function showModel(item) {
     .addEventListener("click", function () {
       var cam = scene.activeCamera;
       cam.alpha = -1.5;
-      cam.beta = 3.13; // 1.57
-      // cam.radius = 2.45;
-      cam.radius = 7;
+      cam.beta = 3.13; 
+      if(expandable !== -1){
+        scene.activeCamera.radius = 0.5;
+       }else{
+        scene.activeCamera.radius = 7;
+       }
     });
 }
 
