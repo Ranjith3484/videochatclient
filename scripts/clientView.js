@@ -679,8 +679,8 @@ function showDeviceImage(item) {
   //end of variant listing
   showCase += variantList;
   showCase += "</div>";
-  showCase +=
-    "<button class='outlinedButton' onclick='shareDevice()'>Share</button>";
+  // showCase +=
+  //   "<button class='outlinedButton' onclick='shareDevice()'>Share</button>";
   showCase += "</div>";
   document.getElementById("deviceShowCase").innerHTML = showCase;
   //show 3d model of first variant by default
@@ -731,11 +731,6 @@ function changeVariant(item) {
 }
 
 function shareDevice() {
-  showModel({
-    path: localStorage.getItem("showingDeviceQRLink"),
-    showQR: true,
-  });
-  document.getElementById(localStorage.getItem("showingDeviceVariant"))
   showModel({
     path: localStorage.getItem("showingDeviceQRLink"),
     showQR: true,
@@ -957,13 +952,77 @@ function showModel(item) {
       scene
     );
     light1.intensity = 2;
-
+    scene.onKeyboardObservable.add((kbInfo) => {
+      let walk = scene.getMeshByName("__root__");
+      switch (kbInfo.type) {
+        case BABYLON.KeyboardEventTypes.KEYDOWN:
+          switch (kbInfo.event.key) {
+          
+                      case "a":
+                      case "A":
+                      walk.position.x -= 0.1;
+                      break
+                      case "d":
+                      case "D":
+                      walk.position.x += 0.1;
+                      break
+                      case "w":
+                      case "W":
+                      walk.position.y += 0.1;
+                      break
+                      case "s":
+                      case "S":
+                      walk.position.y -= 0.1;
+                      break;
+                      case "f":
+                      case "F":
+                      let x = walk.rotation.x - 0.1;
+                      let y = walk.rotation.y;
+                      let z = walk.rotation.z;
+                      walk.rotation = new BABYLON.Vector3(x,y,z);
+                      break;
+                      case "t":
+                      case "T":
+                      let x1 = walk.rotation.x
+                      let y1 = walk.rotation.y -0.1;
+                      let z1 = walk.rotation.z;
+                      walk.rotation = new BABYLON.Vector3(x1,y1,z1);
+                    
+                      break
+                    case "g":
+                    case "G":
+                      walk.scaling.x +=0.1;
+                      walk.scaling.y +=0.1;
+                      break;
+                    case "m":
+                    case "M":
+                      walk.scaling.x -=0.1;
+                      walk.scaling.y -=0.1;
+                      break;
+                      case "v":
+                      case "V":
+                      let x2 = walk.rotation.x + 0.1;
+                      let y2 = walk.rotation.y;
+                      let z2 = walk.rotation.z;
+                      walk.rotation = new BABYLON.Vector3(x2,y2,z2);
+                      break;
+                      case "b":
+                      case "B":
+                      let x3 = walk.rotation.x
+                      let y3 = walk.rotation.y  + 0.1;
+                      let z3 = walk.rotation.z;
+                      walk.rotation = new BABYLON.Vector3(x3,y3,z3);
+                      break
+                  }
+      
+      }
+    });
     // This attaches the camera to the canvas
-    camera.attachControl(modelCanvas, false);
+    camera.attachControl(modelCanvas, true);
     if (path && !showQR) {
       // show 3d model as top layer
       BABYLON.SceneLoader.Append("./", path, scene, function (scene) {
-         scene.createDefaultCameraOrLight(true, true, true);
+         scene.createDefaultCameraOrLight(false, true, false);
          scene.activeCamera.alpha = Math.PI / 2;
          //change raduis for expandable and non expandable phone
          if(expandable !== -1){
@@ -971,6 +1030,15 @@ function showModel(item) {
          }else{
           scene.activeCamera.radius = 7;
          }
+
+         //position the scene leftwards
+         var walk = scene.getMeshByName("__root__");
+         walk.position.x = -2.0;
+
+         //firing event manually to enable jeyboard events
+         document.getElementById("render3DModel").click()
+       
+
         const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
         const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
           scene,
@@ -1047,9 +1115,7 @@ function showModel(item) {
         );
       }
     }
-    // scene.clearColor = new BABYLON.Color4(0, 0, 0, 0.0000000000000001);
-    scene.clearColor = new BABYLON.Color4(1, 1, 1, 1);
-scene.autoClear = true
+     scene.clearColor = new BABYLON.Color4(0, 0, 0, 0.0000000000000001);
 
     return scene;
   };
