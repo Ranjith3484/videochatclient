@@ -124,7 +124,6 @@ function startCallSession() {
   const addMessageHandler = () => {
     signaling.onmessage = async (message) => {
       const data = JSON.parse(message.data);
-      console.log(data, "-->");
       if (!data) {
         return;
       }
@@ -377,7 +376,6 @@ function openAnotherTab(evt, tabName) {
   tablinks = document.getElementsByClassName("textTab");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" activeBold", "");
-    console.log(tablinks[i].className);
   }
 
   document.getElementById(tabName).style.display = "block";
@@ -733,7 +731,6 @@ function openFeatureTab(evt, tabName) {
   tablinks = document.getElementsByClassName("featureTabIcon");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" activeFeature", "");
-    console.log(tablinks[i].className);
   }
 
   document.getElementById(tabName).style.display = "flex";
@@ -975,7 +972,6 @@ function showModel(item) {
       var walk = scene.getMeshByName("__root__");
       switch (pointerInfo.type) {
         case BABYLON.PointerEventTypes.POINTERDOWN:
-          console.log(pointerInfo);
           currentPosition.x = pointerInfo.event.clientX;
           currentPosition.y = pointerInfo.event.clientY;
           clicked = true;
@@ -1069,7 +1065,6 @@ function showModel(item) {
   engine.runRenderLoop(function () {
     scene.render();
     var walk = scene.getMeshByName("__root__");
-    console.log(walk)
   });
 
   // Watch for browser/canvas resize events
