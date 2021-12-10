@@ -901,9 +901,9 @@ table{
         height: 100%;
         width:fit-content !important;
         min-width: 70% !important;
-        max-width: 70% !important;
+        max-width:70% !important;
         position: fixed;
-        z-index: 1;
+        z-index: 2;
         top: 0;
         right: 0;
         background-color: white;

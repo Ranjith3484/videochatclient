@@ -1064,7 +1064,6 @@ function showModel(item) {
   // Register a render loop to repeatedly render the scene
   engine.runRenderLoop(function () {
     scene.render();
-    var walk = scene.getMeshByName("__root__");
   });
 
   // Watch for browser/canvas resize events
