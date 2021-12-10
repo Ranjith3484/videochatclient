@@ -166,6 +166,12 @@ p{
     width:100%
 }
 
+.googleMapImage{
+  height: 780px;
+  object-fit: cover;
+  width: 100%;
+}
+
 #iconSize{
     font-size: 18px;
 }
