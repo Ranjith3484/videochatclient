@@ -118,6 +118,20 @@ function startCallSession() {
       };
     };
 
+    pc.onconnectionstatechange = function (event) {
+      switch (pc.connectionState) {
+        case "connected":
+          break;
+        case "disconnected":
+        case "failed":
+          endCall();
+          break;
+        case "closed":
+          endCall();
+          break;
+      }
+    };
+
     return pc;
   };
 
@@ -187,6 +201,7 @@ function audioChange(userMediaStream) {
   if (document.getElementById("myMic").classList.contains("active")) {
     //mutemic ui
     document.getElementById("myMic").classList.add("inactive");
+    document.getElementById("myMic").classList.add("crossLine");
     document.getElementById("myMic").classList.remove("active");
     //remove audio track
     mediaTracks.forEach(function (device) {
@@ -199,6 +214,7 @@ function audioChange(userMediaStream) {
     //unmutemic ui
     document.getElementById("myMic").classList.add("active");
     document.getElementById("myMic").classList.remove("inactive");
+    document.getElementById("myMic").classList.remove("crossLine");
     //add audio track
     mediaTracks.forEach(function (device) {
       if (device.kind === "audio") {
@@ -215,6 +231,7 @@ function openCloseNav() {
   } else {
     document.getElementById("mySidenav").classList.add("hideElement");
   }
+  document.getElementById("render3DModel").focus();
 }
 
 function openCloseFeatures() {
@@ -963,7 +980,7 @@ function showModel(item) {
           }
       }
     });
-//rotate using mouse
+    //rotate using mouse
     let currentPosition = { x: 0, y: 0 };
 
     let clicked = false;
@@ -994,12 +1011,12 @@ function showModel(item) {
           );
           break;
         case BABYLON.PointerEventTypes.POINTERWHEEL:
-         break;
+          break;
         case BABYLON.PointerEventTypes.POINTERPICK:
           console.log("POINTER PICK");
           break;
         case BABYLON.PointerEventTypes.POINTERTAP:
-       break;
+          break;
         case BABYLON.PointerEventTypes.POINTERDOUBLETAP:
           break;
       }
@@ -1011,7 +1028,7 @@ function showModel(item) {
       // show 3d model as top layer
       BABYLON.SceneLoader.Append("./", path, scene, function (scene) {
         scene.createDefaultCameraOrLight(false, true, false);
-   
+
         //position the scene leftwards
         var walk = scene.getMeshByName("__root__");
         walk.position.x = -1.0;
@@ -1051,7 +1068,6 @@ function showModel(item) {
           deviceId: "",
         }
       );
-
     }
     scene.clearColor = new BABYLON.Color4(0, 0, 0, 0.0000000000000001);
     document.getElementById("render3DModel").focus();
