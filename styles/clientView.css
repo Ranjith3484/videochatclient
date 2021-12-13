@@ -284,13 +284,13 @@ th{
 
 .remoteAudioMutedIcon{
     color: black;
-    font-size: 25px;
+    font-size: 30px !important;
     display: none ;
 }
 
 .remoteAudioUnMutedIcon{
     color: black;
-    font-size: 25px;
+    font-size: 30px !important;
     display: block;
     animation: blink 2s ease-in infinite;
 }
