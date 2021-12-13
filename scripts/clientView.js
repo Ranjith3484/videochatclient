@@ -121,6 +121,7 @@ function startCallSession() {
     pc.onconnectionstatechange = function (event) {
       switch (pc.connectionState) {
         case "connected":
+                  document.getElementsByClassName("remoteAudioUnMutedIcon")[0].style.display = "block";
           break;
         case "disconnected":
         case "failed":
@@ -241,13 +242,13 @@ drone.on("open", (error) => {
             "block";
         }
       } else if (text === "audioMuted") {
-        //check for audio change
-        document.getElementsByClassName("remoteAudioMuteIcon")[0].style.color =
-          "red";
+        console.log('muted')
+        document.getElementsByClassName("remoteAudioMutedIcon")[0].style.display = "block";
+        document.getElementsByClassName("remoteAudioUnMutedIcon")[0].style.display = "none";
       } else if (text === "audioUnMuted") {
-        //check for audio change
-        document.getElementsByClassName("remoteAudioMuteIcon")[0].style.color =
-          "green";
+        console.log('un muted')
+        document.getElementsByClassName("remoteAudioMutedIcon")[0].style.display = "none";
+        document.getElementsByClassName("remoteAudioUnMutedIcon")[0].style.display = "block";
       }
     }
   });
