@@ -259,20 +259,33 @@ th{
     -webkit-transform:rotateY(180deg);
     -moz-transform:rotateY(180deg);  
     object-fit: cover !important;
+    display: block;
 }
 
 #customerImageElement {
     height: 230px;
-    width: 350px; 
+    width: 350px !important; 
     margin: 0px;
     padding: 0px;
-    border: 0;
-     transform: rotateY(180deg);
+    border: 0; 
+    transform: rotateY(180deg);
     -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg);  
-    object-fit: cover !important;
+    -moz-transform:rotateY(180deg); 
+    display: none;
 }
 
+.top-right {
+    transform: rotateY(360deg);
+    -webkit-transform:rotateY(360deg);
+    -moz-transform:rotateY(360deg); 
+    margin-top: -200px;
+    margin-left: 250px;
+  }
+
+.remoteAudioMuteIcon{
+    color: green;
+    font-size: 25px;
+}
 
 #clientVideoElement {
     height: 100%;

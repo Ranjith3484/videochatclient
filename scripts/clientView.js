@@ -196,6 +196,71 @@ function endCall() {
   mediaTracks.forEach((track) => track.stop());
 }
 
+const CLIENT_ID = "LT31hadz55oFVVvT";
+
+const drone = new ScaleDrone(CLIENT_ID, {
+  data: {
+    name: "CSR",
+  },
+});
+
+let members = [];
+
+drone.on("open", (error) => {
+  if (error) {
+    return console.error(error);
+  }
+  console.log("Successfully connected to Scaledrone");
+
+  const room = drone.subscribe("observable-room");
+  room.on("open", (error) => {
+    if (error) {
+      return console.error(error);
+    }
+    console.log("Successfully joined room");
+  });
+
+  room.on("data", (text, member) => {
+    console.log(text, "received message from " + member.clientData.name);
+    if (member.clientData.name === "customer") {
+      //check message only from customer
+      if (text === "videoViewChange") {
+        //check for video change
+        if (
+          document.getElementById("customerVideoElement").style.display ===
+          "none"
+        ) {
+          document.getElementById("customerVideoElement").style.display =
+            "block";
+          document.getElementById("customerImageElement").style.display =
+            "none";
+        } else {
+          document.getElementById("customerVideoElement").style.display =
+            "none";
+          document.getElementById("customerImageElement").style.display =
+            "block";
+        }
+      } else if (text === "audioMuted") {
+        //check for audio change
+        document.getElementsByClassName("remoteAudioMuteIcon")[0].style.color =
+          "red";
+      } else if (text === "audioUnMuted") {
+        //check for audio change
+        document.getElementsByClassName("remoteAudioMuteIcon")[0].style.color =
+          "green";
+      }
+    }
+  });
+});
+
+drone.on("close", (event) => {
+  console.log("Connection was closed", event);
+});
+
+drone.on("error", (error) => {
+  console.error(error);
+});
+
 function audioChange(userMediaStream) {
   const mediaTracks = userMediaStream.getTracks();
   if (document.getElementById("myMic").classList.contains("active")) {
@@ -203,6 +268,11 @@ function audioChange(userMediaStream) {
     document.getElementById("myMic").classList.add("inactive");
     document.getElementById("myMic").classList.add("crossLine");
     document.getElementById("myMic").classList.remove("active");
+     //send message via drone for audio muted
+     drone.publish({
+      room: "observable-room",
+      message: "audioMuted",
+    });
     //remove audio track
     mediaTracks.forEach(function (device) {
       if (device.kind === "audio") {
@@ -215,6 +285,11 @@ function audioChange(userMediaStream) {
     document.getElementById("myMic").classList.add("active");
     document.getElementById("myMic").classList.remove("inactive");
     document.getElementById("myMic").classList.remove("crossLine");
+     //send message via drone for audio un muted
+     drone.publish({
+      room: "observable-room",
+      message: "audioUnMuted",
+    });
     //add audio track
     mediaTracks.forEach(function (device) {
       if (device.kind === "audio") {
