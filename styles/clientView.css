@@ -145,7 +145,7 @@ th{
     transform: rotateY(360deg);
     -webkit-transform:rotateY(360deg);
     -moz-transform:rotateY(360deg); 
-    margin-top: 150px;
+    margin-top: 140px;
 }
 
 .icon{
@@ -191,15 +191,15 @@ th{
     background: 
         linear-gradient(to top left,
             rgba(0,0,0,0) 0%,
-            rgba(0,0,0,0) calc(50% - 0px),
-            rgb(255,255,255) 50%,
-            rgba(0,0,0,0) calc(50% + 0px),
-            rgba(0,0,0,0) 100%),
-        linear-gradient(to top right,
-            rgba(0,0,0,0) 0%,
             rgba(0,0,0,0) calc(50% - 3px),
             rgb(255,255,255) 50%,
             rgba(0,0,0,0) calc(50% + 3px),
+            rgba(0,0,0,0) 100%),
+        linear-gradient(to top right,
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,0) calc(50% - 0px),
+            rgb(255,255,255) 50%,
+            rgba(0,0,0,0) calc(50% + 0px),
             rgba(0,0,0,0) 100%);
 }
 
