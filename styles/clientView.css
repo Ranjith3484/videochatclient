@@ -141,8 +141,11 @@ th{
     font-weight: bold;
     font-size: 25px;
     text-align: center;
-    margin-top: -50px;
     font-family: verizonBoldFont;
+    transform: rotateY(360deg);
+    -webkit-transform:rotateY(360deg);
+    -moz-transform:rotateY(360deg); 
+    margin-top: 150px;
 }
 
 .icon{

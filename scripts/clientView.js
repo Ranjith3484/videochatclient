@@ -222,7 +222,6 @@ drone.on("open", (error) => {
   });
 
   room.on("data", (text, member) => {
-    console.log(text, "received message from " + member.clientData.name);
     if (member.clientData.name === "customer") {
       //check message only from customer
       if (text === "videoViewChange") {
@@ -249,6 +248,8 @@ drone.on("open", (error) => {
         console.log('un muted')
         document.getElementsByClassName("remoteAudioMutedIcon")[0].style.display = "none";
         document.getElementsByClassName("remoteAudioUnMutedIcon")[0].style.display = "block";
+      }else{ //add the customer name
+        document.getElementById("customerName").innerHTML = text;
       }
     }
   });
