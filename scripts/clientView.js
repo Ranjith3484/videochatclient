@@ -1022,6 +1022,25 @@ function showModel(item) {
     );
     light1.intensity = 2;
 
+    //moving the model
+    // modelCanvas.addEventListener('contextmenu', function(evt) { 
+    //   console.log(evt.clientX,"x-x");
+    //   console.log(evt.clientY,"y-y");
+    //   console.log(evt,"0----");
+    //   let walk = scene.getMeshByName("__root__");
+     
+    //     walk.position.x -= 0.1;
+    // })
+
+    // modelCanvas.addEventListener('mousemove', function(evt) { 
+    
+    //   let walk = scene.getMeshByName("__root__");
+    //  console.log(evt.offsetX, 'x--')
+    //  console.log(evt.offsetY, 'y--')
+    //     // walk.position.x -= 0.1;
+ 
+    // })
+
     //keyboard events for moving the model
     scene.onKeyboardObservable.add((kbInfo) => {
       let walk = scene.getMeshByName("__root__");
@@ -1109,6 +1128,12 @@ function showModel(item) {
         //position the scene leftwards
         var walk = scene.getMeshByName("__root__");
         walk.position.x = -1.0;
+        //pushing rotation object to enable camera features
+        walk.rotation = new BABYLON.Vector3(
+          walk.rotation.x,
+          walk.rotation.y,
+          walk.position.z
+        );
 
         const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
         const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
