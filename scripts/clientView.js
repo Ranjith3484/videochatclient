@@ -326,6 +326,7 @@ function openCloseFeatures() {
     document.getElementById("myFeaturesHolder").classList.add("hideElement");
     // document.getElementById("drawLine").style.pointerEvents = "none";
   }
+  document.getElementById("render3DModel").focus();
 }
 
 function openSideBarAndTab(event, tabName) {
@@ -857,6 +858,7 @@ function showDeviceFeature(feature) {
   document.getElementById("show" + feature).style.borderBottom =
     "2px solid white";
   localStorage.setItem("showDeviceFeature", feature);
+  document.getElementById("render3DModel").focus();
 }
 
 //draw line
