@@ -1110,7 +1110,7 @@ function showModel(item) {
 
         //position the scene leftwards
         var walk = scene.getMeshByName("__root__");
-        walk.position.x = -2;
+        // walk.position.x = -2;
         //pushing rotation object to enable camera features
         walk.rotation = new BABYLON.Vector3(
           walk.rotation.x,
