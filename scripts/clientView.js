@@ -1109,11 +1109,11 @@ function showModel(item) {
           }
           if (walk !== null) {
             walk.rotation.y =
-              parseInt(currentRotation.y) -
+              currentRotation.y -
               (pointerInfo.event.clientX - currentPosition.x) / 100.0;
 
             walk.rotation.x =
-              parseInt(currentRotation.x) +
+            currentRotation.x +
               (pointerInfo.event.clientY - currentPosition.y) / 100.0;
           }
           break;
