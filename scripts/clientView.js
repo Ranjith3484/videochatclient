@@ -121,7 +121,9 @@ function startCallSession() {
     pc.onconnectionstatechange = function (event) {
       switch (pc.connectionState) {
         case "connected":
-                  document.getElementsByClassName("remoteAudioUnMutedIcon")[0].style.display = "block";
+          document.getElementsByClassName(
+            "remoteAudioUnMutedIcon"
+          )[0].style.display = "block";
           break;
         case "disconnected":
         case "failed":
@@ -241,15 +243,27 @@ drone.on("open", (error) => {
             "block";
         }
       } else if (text === "audioMuted") {
-        console.log('muted')
-        document.getElementsByClassName("remoteAudioMutedIcon")[0].style.display = "block";
-        document.getElementsByClassName("remoteAudioUnMutedIcon")[0].style.display = "none";
+        console.log("muted");
+        document.getElementsByClassName(
+          "remoteAudioMutedIcon"
+        )[0].style.display = "block";
+        document.getElementsByClassName(
+          "remoteAudioUnMutedIcon"
+        )[0].style.display = "none";
       } else if (text === "audioUnMuted") {
-        console.log('un muted')
-        document.getElementsByClassName("remoteAudioMutedIcon")[0].style.display = "none";
-        document.getElementsByClassName("remoteAudioUnMutedIcon")[0].style.display = "block";
-      }else{ //add the customer name
-        document.getElementById("customerName").innerHTML = text;
+        console.log("un muted");
+        document.getElementsByClassName(
+          "remoteAudioMutedIcon"
+        )[0].style.display = "none";
+        document.getElementsByClassName(
+          "remoteAudioUnMutedIcon"
+        )[0].style.display = "block";
+      } else {
+        //add the customer name
+        document.getElementById("customerName").innerHTML = text.name;
+        document.getElementById("customerNameInside").innerHTML = text.name;
+        document.getElementById("customerContact").innerHTML = text.contact;
+        document.getElementById("callReason").innerHTML = text.reason;
       }
     }
   });
@@ -270,8 +284,8 @@ function audioChange(userMediaStream) {
     document.getElementById("myMic").classList.add("inactive");
     document.getElementById("myMic").classList.add("crossLine");
     document.getElementById("myMic").classList.remove("active");
-     //send message via drone for audio muted
-     drone.publish({
+    //send message via drone for audio muted
+    drone.publish({
       room: "observable-room",
       message: "audioMuted",
     });
@@ -287,8 +301,8 @@ function audioChange(userMediaStream) {
     document.getElementById("myMic").classList.add("active");
     document.getElementById("myMic").classList.remove("inactive");
     document.getElementById("myMic").classList.remove("crossLine");
-     //send message via drone for audio un muted
-     drone.publish({
+    //send message via drone for audio un muted
+    drone.publish({
       room: "observable-room",
       message: "audioUnMuted",
     });
@@ -759,6 +773,7 @@ function showDeviceImage(item) {
   showModel({
     path: arr[0].variant[0].model,
     showQR: false,
+    changeVariant: false,
   });
 }
 
@@ -799,6 +814,7 @@ function changeVariant(item) {
   showModel({
     path: details.model,
     showQR: false,
+    changeVariant: true,
   });
 }
 
@@ -806,6 +822,7 @@ function shareDevice() {
   showModel({
     path: localStorage.getItem("showingDeviceQRLink"),
     showQR: true,
+    changeVariant: false,
   });
   openCloseNav();
 }
@@ -993,11 +1010,14 @@ function findxy(res, e) {
 showModel({
   path: "",
   showQR: false,
+  changeVariant: false,
 });
 
 function showModel(item) {
   var path = item.path;
   var showQR = item.showQR;
+  var changeVariant = item.changeVariant;
+
   //show 3d model
   const modelCanvas = document.getElementById("render3DModel"); // Get the canvas element
   modelCanvas.setAttribute("width", window.innerWidth);
@@ -1058,9 +1078,15 @@ function showModel(item) {
               break;
           }
       }
+      localStorage.setItem("walkPositionX", walk.position.x);
+      localStorage.setItem("walkPositionY", walk.position.y);
+      localStorage.setItem("walkScalingX", walk.scaling.x);
+      localStorage.setItem("walkScalingY", walk.scaling.y);
     });
+
     //rotate using mouse
     let currentPosition = { x: 0, y: 0 };
+    var currentRotation = { x: 0, y: 0 };
 
     let clicked = false;
 
@@ -1070,6 +1096,8 @@ function showModel(item) {
         case BABYLON.PointerEventTypes.POINTERDOWN:
           currentPosition.x = pointerInfo.event.clientX;
           currentPosition.y = pointerInfo.event.clientY;
+          currentRotation.x = walk.rotation.x;
+          currentRotation.y = walk.rotation.y;
           clicked = true;
           break;
         case BABYLON.PointerEventTypes.POINTERUP:
@@ -1079,15 +1107,15 @@ function showModel(item) {
           if (!clicked) {
             return;
           }
-          walk.rotation.y =
-            (pointerInfo.event.clientX - currentPosition.x) / 50.0;
-          walk.rotation.x =
-            (pointerInfo.event.clientY - currentPosition.y) / 100.0;
-          walk.rotation = new BABYLON.Vector3(
-            walk.rotation.x,
-            walk.rotation.y,
-            walk.position.z
-          );
+          if (walk !== null) {
+            walk.rotation.y =
+              parseInt(currentRotation.y) -
+              (pointerInfo.event.clientX - currentPosition.x) / 100.0;
+
+            walk.rotation.x =
+              parseInt(currentRotation.x) +
+              (pointerInfo.event.clientY - currentPosition.y) / 100.0;
+          }
           break;
         case BABYLON.PointerEventTypes.POINTERWHEEL:
           break;
@@ -1099,6 +1127,11 @@ function showModel(item) {
         case BABYLON.PointerEventTypes.POINTERDOUBLETAP:
           break;
       }
+
+      localStorage.setItem("walkRotationX", walk.rotation.x);
+      localStorage.setItem("walkRotationY", walk.rotation.y);
+      localStorage.setItem("walkPositionX", walk.position.x);
+      localStorage.setItem("walkPositionY", walk.position.y);
     });
 
     // This attaches the camera to the canvas
@@ -1108,15 +1141,26 @@ function showModel(item) {
       BABYLON.SceneLoader.Append("./", path, scene, function (scene) {
         scene.createDefaultCameraOrLight(false, true, false);
 
-        //position the scene leftwards
         var walk = scene.getMeshByName("__root__");
-        // walk.position.x = -2;
+
+        //initialize the model position
+         walk.position.x = -1;
+
+        if (changeVariant && walk !== null) {
+          //set to previous position, if variant changed
+          // walk.rotation.x = localStorage.getItem("walkRotationX");
+          // walk.rotation.y = localStorage.getItem("walkRotationY");
+          // walk.position.x = localStorage.getItem("walkPositionX");
+          // walk.position.y = localStorage.getItem("walkPositionY");
+          // walk.scaling.x = localStorage.getItem("walkScalingX");
+          // walk.scaling.y = localStorage.getItem("walkScalingY");
+        }
+
         //pushing rotation object to enable camera features
-        walk.rotation = new BABYLON.Vector3(
-          walk.rotation.x,
-          walk.rotation.y,
-          walk.position.z
-        );
+        walk.rotation = new BABYLON.Vector3(walk.rotation.x, walk.rotation.y);
+
+        //pushing position object to enable camera features
+        walk.position = new BABYLON.Vector3(walk.position.x, walk.position.y);
 
         const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
         const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
@@ -1179,6 +1223,8 @@ function showModel(item) {
       var walk = scene.getMeshByName("__root__");
       walk.rotation.x = 0;
       walk.rotation.y = 0;
+      localStorage.setItem("walkRotationX", 0);
+      localStorage.setItem("walkRotationY", 0);
     });
 
   // Watch for back camera click events
@@ -1188,6 +1234,8 @@ function showModel(item) {
       var walk = scene.getMeshByName("__root__");
       walk.rotation.x = 0.006;
       walk.rotation.y = -3.09;
+      localStorage.setItem("walkRotationX", 0.006);
+      localStorage.setItem("walkRotationY", -3.09);
     });
 
   // Watch for sim insert click events
@@ -1197,6 +1245,8 @@ function showModel(item) {
       var walk = scene.getMeshByName("__root__");
       walk.rotation.x = 0.083;
       walk.rotation.y = 4.5;
+      localStorage.setItem("walkRotationX", 0.083);
+      localStorage.setItem("walkRotationY", 4.5);
     });
 
   // Watch for charging port click events
@@ -1206,7 +1256,17 @@ function showModel(item) {
       var walk = scene.getMeshByName("__root__");
       walk.rotation.x = -1.49;
       walk.rotation.y = 3.04;
+      localStorage.setItem("walkRotationX", -1.49);
+      localStorage.setItem("walkRotationY", 3.04);
     });
 }
 
 startCallSession();
+
+// set default value as 0 for both
+localStorage.setItem("walkRotationX", 0);
+localStorage.setItem("walkRotationY", 0);
+localStorage.setItem("walkPositionX", 0);
+localStorage.setItem("walkPositionY", 0);
+localStorage.setItem("walkScalingX", 0);
+localStorage.setItem("walkScalingY", 0);
