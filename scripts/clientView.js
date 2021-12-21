@@ -765,8 +765,8 @@ function showDeviceImage(item) {
   //end of variant listing
   showCase += variantList;
   showCase += "</div>";
-  // showCase +=
-  //   "<button class='outlinedButton' onclick='shareDevice()'>Share</button>";
+   showCase +=
+     "<button class='outlinedButton' onclick='shareDevice()'>Share</button>";
   showCase += "</div>";
   document.getElementById("deviceShowCase").innerHTML = showCase;
    document.getElementById("refreshModel").click();
@@ -1184,7 +1184,7 @@ function showModel(item) {
         );
         videoTexture.video.muted = true;
       });
-    } else {
+    }else {
       const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
       const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
         scene,
@@ -1201,6 +1201,47 @@ function showModel(item) {
           deviceId: "",
         }
       );
+      // show qr code as top layer
+      if (path && showQR) {  
+       var plane = BABYLON.MeshBuilder.CreatePlane(
+          "plane",
+          { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
+          scene
+        );
+        var mat = new BABYLON.StandardMaterial("", scene);
+        mat.diffuseTexture = new BABYLON.Texture(path, scene);
+         plane.material = mat;
+
+        plane.scaling.z = 0.01;
+        plane.position.z = 10;
+        plane.position.y = 0;
+        plane.position.x = -3;
+
+        plane.parent = camera;
+        camera.minZ = 0;
+
+        //move the 3d model away from qr to avoid overlay of 3d model over qr
+       document.getElementById("showSimInsert").click();
+      } else {
+        // show only video
+        const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
+        const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
+          scene,
+          (videoTexture) => {
+            videoTexture._invertY = false;
+            videoTexture;
+            videoLayer.texture = videoTexture;
+            
+          },
+          {
+            minWidth: 640,
+            minHeight: 480,
+            maxWidth: 1920,
+            maxHeight: 1080,
+            deviceId: "",
+          }
+        );
+      }
     }
     scene.clearColor = new BABYLON.Color4(0, 0, 0, 0.0000000000000001);
     document.getElementById("render3DModel").focus();
