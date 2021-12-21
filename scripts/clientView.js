@@ -769,6 +769,7 @@ function showDeviceImage(item) {
   //   "<button class='outlinedButton' onclick='shareDevice()'>Share</button>";
   showCase += "</div>";
   document.getElementById("deviceShowCase").innerHTML = showCase;
+   document.getElementById("refreshModel").click();
   //show 3d model of first variant by default
   showModel({
     path: arr[0].variant[0].model,
@@ -810,6 +811,7 @@ function changeVariant(item) {
     }
   }
 
+   document.getElementById("refreshModel").click();
   //show 3d model of selected variant
   showModel({
     path: details.model,
@@ -819,6 +821,7 @@ function changeVariant(item) {
 }
 
 function shareDevice() {
+   document.getElementById("refreshModel").click();
   showModel({
     path: localStorage.getItem("showingDeviceQRLink"),
     showQR: true,
@@ -1007,6 +1010,7 @@ function findxy(res, e) {
   }
 }
 
+//initial call to show webcam
 showModel({
   path: "",
   showQR: false,
@@ -1259,6 +1263,14 @@ function showModel(item) {
       localStorage.setItem("walkRotationX", -1.49);
       localStorage.setItem("walkRotationY", 3.04);
     });
+
+  // Watch for model change and dispose the model
+  document
+  .getElementById("refreshModel")
+  .addEventListener("click", function () {
+    var walk = scene.getMeshByName("__root__");
+    walk.dispose();
+  });
 }
 
 startCallSession();
