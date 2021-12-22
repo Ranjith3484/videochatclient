@@ -29,7 +29,7 @@ function startCallSession() {
           console.log("canv source: ", userMediaStream.getAudioTracks()); // prints  []
         });
 
-      signaling = new WebSocket("wss://videochat-app-bj.herokuapp.com");
+      signaling = new WebSocket("wss://1videochat-app-bj.herokuapp.com");
 
       setTimeout(function () {
         peerConnection = createPeerConnection();
@@ -512,67 +512,67 @@ var devicesBrands = [
           },
         ],
       },
-      {
-        name: "iPhone 12 Pro",
-        displayName: "Apple iPhone 12 Pro",
-        variant: [
-          {
-            color: "#F6E0C9",
-            image: "./assets/iPhone12Pro/iphone-12-pro-gold.png",
-            model: "./assets/iPhone12Pro/iPhone12Pro_Gold.glb",
-            webLink: "https://www.apple.com/in/iphone/",
-            qrLink: "./assets/iPhone12Pro/qr.png",
-            active: true,
-          },
-          {
-            color: "#383428",
-            image: "./assets/iPhone12Pro/iphone-12-pro-graphite.png",
-            model: "./assets/iPhone12Pro/iPhone12Pro_Graphite.glb",
-            webLink: "https://www.apple.com/in/iphone/",
-            qrLink: "./assets/iPhone12Pro/qr.png",
-          },
-          {
-            color: "#D8D7CB",
-            image: "./assets/iPhone12Pro/iphone-12-pro-silver.png",
-            model: "./assets/iPhone12Pro/iPhone12Pro_Silver.glb",
-            webLink: "https://www.apple.com/in/iphone/",
-            qrLink: "./assets/iPhone12Pro/qr.png",
-          },
-        ],
-      },
+      // {
+      //   name: "iPhone 12 Pro",
+      //   displayName: "Apple iPhone 12 Pro",
+      //   variant: [
+      //     {
+      //       color: "#F6E0C9",
+      //       image: "./assets/iPhone12Pro/iphone-12-pro-gold.png",
+      //       model: "./assets/iPhone12Pro/iPhone12Pro_Gold.glb",
+      //       webLink: "https://www.apple.com/in/iphone/",
+      //       qrLink: "./assets/iPhone12Pro/qr.png",
+      //       active: true,
+      //     },
+      //     {
+      //       color: "#383428",
+      //       image: "./assets/iPhone12Pro/iphone-12-pro-graphite.png",
+      //       model: "./assets/iPhone12Pro/iPhone12Pro_Graphite.glb",
+      //       webLink: "https://www.apple.com/in/iphone/",
+      //       qrLink: "./assets/iPhone12Pro/qr.png",
+      //     },
+      //     {
+      //       color: "#D8D7CB",
+      //       image: "./assets/iPhone12Pro/iphone-12-pro-silver.png",
+      //       model: "./assets/iPhone12Pro/iPhone12Pro_Silver.glb",
+      //       webLink: "https://www.apple.com/in/iphone/",
+      //       qrLink: "./assets/iPhone12Pro/qr.png",
+      //     },
+      //   ],
+      // },
     ],
   },
   {
     brand: "Samsung",
     devices: [
-      {
-        name: "Galaxy A42",
-        displayName: "Samsung Galaxy A42",
-        variant: [
-          {
-            color: "black",
-            image: "./assets/samsungA42/samsung-a42-black.png",
-            model: "./assets/samsungA42/SamsungA42_Black.glb",
-            webLink: "https://www.samsung.com/us/smartphones/galaxy-a42-5g/",
-            qrLink: "./assets/samsungA42/qr.png",
-            active: true,
-          },
-          {
-            color: "grey",
-            image: "./assets/samsungA42/samsung-a42-gray.png",
-            webLink: "https://www.samsung.com/us/smartphones/galaxy-a42-5g/",
-            model: "./assets/samsungA42/SamsungA42_Gray.glb",
-            qrLink: "./assets/samsungA42/qr.png",
-          },
-          {
-            color: "white",
-            image: "./assets/samsungA42/samsung-a42-white.png",
-            webLink: "https://www.samsung.com/us/smartphones/galaxy-a42-5g/",
-            model: "./assets/samsungA42/SamsungA42_White.glb",
-            qrLink: "./assets/samsungA42/qr.png",
-          },
-        ],
-      },
+      // {
+      //   name: "Galaxy A42",
+      //   displayName: "Samsung Galaxy A42",
+      //   variant: [
+      //     {
+      //       color: "black",
+      //       image: "./assets/samsungA42/samsung-a42-black.png",
+      //       model: "./assets/samsungA42/SamsungA42_Black.glb",
+      //       webLink: "https://www.samsung.com/us/smartphones/galaxy-a42-5g/",
+      //       qrLink: "./assets/samsungA42/qr.png",
+      //       active: true,
+      //     },
+      //     {
+      //       color: "grey",
+      //       image: "./assets/samsungA42/samsung-a42-gray.png",
+      //       webLink: "https://www.samsung.com/us/smartphones/galaxy-a42-5g/",
+      //       model: "./assets/samsungA42/SamsungA42_Gray.glb",
+      //       qrLink: "./assets/samsungA42/qr.png",
+      //     },
+      //     {
+      //       color: "white",
+      //       image: "./assets/samsungA42/samsung-a42-white.png",
+      //       webLink: "https://www.samsung.com/us/smartphones/galaxy-a42-5g/",
+      //       model: "./assets/samsungA42/SamsungA42_White.glb",
+      //       qrLink: "./assets/samsungA42/qr.png",
+      //     },
+      //   ],
+      // },
       {
         name: "Galaxy Z Flip",
         displayName: "Samsung Galaxy Z Flip",
@@ -587,37 +587,37 @@ var devicesBrands = [
           },
         ],
       },
-      {
-        name: "Galaxy S21",
-        displayName: "Samsung Galaxy S21",
-        variant: [
-          {
-            color: "pink",
-            image: "./assets/samsungS21/samsung-S21-pink.png",
-            model: "./assets/samsungS21/SamsungS21_Pink.glb",
-            webLink:
-              "https://www.samsung.com/in/smartphones/galaxy-s21-5g/buy/",
-            qrLink: "./assets/samsungS21/qr.png",
-            active: true,
-          },
-          {
-            color: "violet",
-            image: "./assets/samsungS21/samsung-S21-violet.png",
-            webLink:
-              "https://www.samsung.com/in/smartphones/galaxy-s21-5g/buy/",
-            model: "./assets/samsungS21/SamsungS21_Violet.glb",
-            qrLink: "./assets/samsungS21/qr.png",
-          },
-          {
-            color: "white",
-            image: "./assets/samsungS21/samsung-S21-white.png",
-            webLink:
-              "https://www.samsung.com/in/smartphones/galaxy-s21-5g/buy/",
-            model: "./assets/samsungS21/SamsungS21_White.glb",
-            qrLink: "./assets/samsungS21/qr.png",
-          },
-        ],
-      },
+      // {
+      //   name: "Galaxy S21",
+      //   displayName: "Samsung Galaxy S21",
+      //   variant: [
+      //     {
+      //       color: "pink",
+      //       image: "./assets/samsungS21/samsung-S21-pink.png",
+      //       model: "./assets/samsungS21/SamsungS21_Pink.glb",
+      //       webLink:
+      //         "https://www.samsung.com/in/smartphones/galaxy-s21-5g/buy/",
+      //       qrLink: "./assets/samsungS21/qr.png",
+      //       active: true,
+      //     },
+      //     {
+      //       color: "violet",
+      //       image: "./assets/samsungS21/samsung-S21-violet.png",
+      //       webLink:
+      //         "https://www.samsung.com/in/smartphones/galaxy-s21-5g/buy/",
+      //       model: "./assets/samsungS21/SamsungS21_Violet.glb",
+      //       qrLink: "./assets/samsungS21/qr.png",
+      //     },
+      //     {
+      //       color: "white",
+      //       image: "./assets/samsungS21/samsung-S21-white.png",
+      //       webLink:
+      //         "https://www.samsung.com/in/smartphones/galaxy-s21-5g/buy/",
+      //       model: "./assets/samsungS21/SamsungS21_White.glb",
+      //       qrLink: "./assets/samsungS21/qr.png",
+      //     },
+      //   ],
+      // },
     ],
   },
   {
@@ -1017,6 +1017,21 @@ showModel({
   changeVariant: false,
 });
 
+var walkRotation = {
+  x:0,
+  y:0
+}
+
+var walkPosition = {
+  x:-2.5,
+  y:0.5
+}
+
+var walkScaling = {
+  x:1,
+  y:1
+}
+
 function showModel(item) {
   var path = item.path;
   var showQR = item.showQR;
@@ -1082,10 +1097,12 @@ function showModel(item) {
               break;
           }
       }
-      localStorage.setItem("walkPositionX", walk.position.x);
-      localStorage.setItem("walkPositionY", walk.position.y);
-      localStorage.setItem("walkScalingX", walk.scaling.x);
-      localStorage.setItem("walkScalingY", walk.scaling.y);
+      walkPosition.x =  parseFloat(walk.position.x);
+      walkPosition.y =  parseFloat(walk.position.y);
+
+      walkScaling.x = parseFloat(walk.scaling.x);
+      walkScaling.y = parseFloat(walk.scaling.y);
+
     });
 
     //rotate using mouse
@@ -1132,10 +1149,12 @@ function showModel(item) {
           break;
       }
 
-      localStorage.setItem("walkRotationX", walk.rotation.x);
-      localStorage.setItem("walkRotationY", walk.rotation.y);
-      localStorage.setItem("walkPositionX", walk.position.x);
-      localStorage.setItem("walkPositionY", walk.position.y);
+      walkPosition.x =  parseFloat(walk.position.x);
+      walkPosition.y =  parseFloat(walk.position.y);
+
+      walkRotation.x = parseFloat(walk.rotation.x);
+      walkRotation.y = parseFloat(walk.rotation.y);
+
     });
 
     // This attaches the camera to the canvas
@@ -1148,17 +1167,27 @@ function showModel(item) {
         var walk = scene.getMeshByName("__root__");
 
         //initialize the model position
-         walk.position.x = -1;
 
-        if (changeVariant && walk !== null) {
-          //set to previous position, if variant changed
-          // walk.rotation.x = localStorage.getItem("walkRotationX");
-          // walk.rotation.y = localStorage.getItem("walkRotationY");
-          // walk.position.x = localStorage.getItem("walkPositionX");
-          // walk.position.y = localStorage.getItem("walkPositionY");
-          // walk.scaling.x = localStorage.getItem("walkScalingX");
-          // walk.scaling.y = localStorage.getItem("walkScalingY");
-        }
+         walk.position.x = -2.5;
+         walk.position.y = 0.5;
+
+        // if (changeVariant && walk !== null) {
+        //   //set to previous position, if variant changed
+        //   walk.rotation.x = parseFloat(walkRotation.x);
+        //   walk.rotation.y = parseFloat(walkRotation.y);
+        //   walk.position.x = parseFloat(walkPosition.x);
+        //   walk.position.y = parseFloat(walkPosition.y);
+        //   walk.scaling.x = parseFloat(walkScaling.x);
+        //   walk.scaling.y = parseFloat(walkScaling.y);
+        // } else{
+        //   //set to default values  while changing model
+        //   walkPosition.x =  -2.5;
+        //   walkPosition.y =  0.5;
+        //   walkRotation.x = 0;
+        //   walkRotation.y = 0;
+        //   walkScaling.x = 1;
+        //   walkScaling.y = 1;
+        // }
 
         //pushing rotation object to enable camera features
         walk.rotation = new BABYLON.Vector3(walk.rotation.x, walk.rotation.y);
@@ -1227,8 +1256,9 @@ function showModel(item) {
       var walk = scene.getMeshByName("__root__");
       walk.rotation.x = 0;
       walk.rotation.y = 0;
-      localStorage.setItem("walkRotationX", 0);
-      localStorage.setItem("walkRotationY", 0);
+
+      walkRotation.x = 0;
+      walkRotation.y = 0;
     });
 
   // Watch for back camera click events
@@ -1238,8 +1268,9 @@ function showModel(item) {
       var walk = scene.getMeshByName("__root__");
       walk.rotation.x = 0.006;
       walk.rotation.y = -3.09;
-      localStorage.setItem("walkRotationX", 0.006);
-      localStorage.setItem("walkRotationY", -3.09);
+
+      walkRotation.x = parseFloat(0.006);
+      walkRotation.y = parseFloat(-3.09);
     });
 
   // Watch for sim insert click events
@@ -1249,8 +1280,10 @@ function showModel(item) {
       var walk = scene.getMeshByName("__root__");
       walk.rotation.x = 0.083;
       walk.rotation.y = 4.5;
-      localStorage.setItem("walkRotationX", 0.083);
-      localStorage.setItem("walkRotationY", 4.5);
+
+      walkRotation.x = parseFloat(0.083);
+      walkRotation.y = parseFloat(4.5);
+
     });
 
   // Watch for charging port click events
@@ -1258,10 +1291,12 @@ function showModel(item) {
     .getElementById("showChargingPort")
     .addEventListener("click", function () {
       var walk = scene.getMeshByName("__root__");
-      walk.rotation.x = -1.49;
-      walk.rotation.y = 3.04;
-      localStorage.setItem("walkRotationX", -1.49);
-      localStorage.setItem("walkRotationY", 3.04);
+      walk.rotation.x = -1.45;
+      walk.rotation.y = 2.66;
+
+      walkRotation.x = parseFloat(-1.45);
+      walkRotation.y = parseFloat(2.66);
+
     });
 
   // Watch for model change and dispose the model
@@ -1274,11 +1309,3 @@ function showModel(item) {
 }
 
 startCallSession();
-
-// set default value as 0 for both
-localStorage.setItem("walkRotationX", 0);
-localStorage.setItem("walkRotationY", 0);
-localStorage.setItem("walkPositionX", 0);
-localStorage.setItem("walkPositionY", 0);
-localStorage.setItem("walkScalingX", 0);
-localStorage.setItem("walkScalingY", 0);
