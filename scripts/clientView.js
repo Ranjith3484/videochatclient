@@ -717,7 +717,6 @@ function showDeviceImage(item) {
     }
   }
 
-
   var j, tab;
   //removing active style for features section
   tab = document.getElementsByClassName("featuresText");
@@ -775,11 +774,11 @@ function showDeviceImage(item) {
   //end of variant listing
   showCase += variantList;
   showCase += "</div>";
-   showCase +=
-     "<button class='outlinedButton' onclick='shareDevice()'>Share</button>";
+  showCase +=
+    "<button class='outlinedButton' onclick='shareDevice()'>Share</button>";
   showCase += "</div>";
   document.getElementById("deviceShowCase").innerHTML = showCase;
-   document.getElementById("refreshModel").click();
+  document.getElementById("refreshModel").click();
   //show 3d model of first variant by default
   showModel({
     path: arr[0].variant[0].model,
@@ -821,7 +820,7 @@ function changeVariant(item) {
     }
   }
 
-   document.getElementById("refreshModel").click();
+  document.getElementById("refreshModel").click();
   //show 3d model of selected variant
   showModel({
     path: details.model,
@@ -831,7 +830,7 @@ function changeVariant(item) {
 }
 
 function shareDevice() {
-   document.getElementById("refreshModel").click();
+  document.getElementById("refreshModel").click();
   showModel({
     path: localStorage.getItem("showingDeviceQRLink"),
     showQR: true,
@@ -1028,20 +1027,20 @@ showModel({
 });
 
 var walkRotation = {
-  x:0,
-  y:0
-}
+  x: 0,
+  y: 0,
+};
 
 var walkPosition = {
-  x:-2.5,
-  y:0.5
-}
+  x: -2.5,
+  y: 0.5,
+};
 
 var walkScaling = {
-  x:0.9,
-  y:0.9,
-  z:-1
-}
+  x: 0.9,
+  y: 0.9,
+  z: -1,
+};
 
 function showModel(item) {
   var path = item.path;
@@ -1110,13 +1109,12 @@ function showModel(item) {
               break;
           }
       }
-      walkPosition.x =  parseFloat(walk.position.x);
-      walkPosition.y =  parseFloat(walk.position.y);
+      walkPosition.x = parseFloat(walk.position.x);
+      walkPosition.y = parseFloat(walk.position.y);
 
       walkScaling.x = parseFloat(walk.scaling.x);
       walkScaling.y = parseFloat(walk.scaling.y);
       walkScaling.z = parseFloat(walk.scaling.z);
-
     });
 
     //rotate using mouse
@@ -1148,7 +1146,7 @@ function showModel(item) {
               (pointerInfo.event.clientX - currentPosition.x) / 100.0;
 
             walk.rotation.x =
-            currentRotation.x +
+              currentRotation.x +
               (pointerInfo.event.clientY - currentPosition.y) / 100.0;
           }
           break;
@@ -1163,12 +1161,11 @@ function showModel(item) {
           break;
       }
 
-      walkPosition.x =  parseFloat(walk.position.x);
-      walkPosition.y =  parseFloat(walk.position.y);
+      walkPosition.x = parseFloat(walk.position.x);
+      walkPosition.y = parseFloat(walk.position.y);
 
       walkRotation.x = parseFloat(walk.rotation.x);
       walkRotation.y = parseFloat(walk.rotation.y);
-
     });
 
     // This attaches the camera to the canvas
@@ -1182,12 +1179,12 @@ function showModel(item) {
 
         //initialize the model position
 
-         walk.position.x = -2.5;
-         walk.position.y = 0.5;
+        walk.position.x = -2.5;
+        walk.position.y = 0.5;
 
-         walk.scaling.z = -1;
-         walk.scaling.x = 0.9;
-         walk.scaling.y = 0.9;
+        walk.scaling.z = -1;
+        walk.scaling.x = 0.9;
+        walk.scaling.y = 0.9;
 
         // if (changeVariant && walk !== null) {
         //   //set to previous position, if variant changed
@@ -1216,7 +1213,11 @@ function showModel(item) {
         walk.position = new BABYLON.Vector3(walk.position.x, walk.position.y);
 
         //pushing scaling object to enable camera features
-        walk.scaling = new BABYLON.Vector3(walk.scaling.x, walk.scaling.y, walk.scaling.z);
+        walk.scaling = new BABYLON.Vector3(
+          walk.scaling.x,
+          walk.scaling.y,
+          walk.scaling.z
+        );
 
         const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
         const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
@@ -1236,7 +1237,8 @@ function showModel(item) {
         );
         videoTexture.video.muted = true;
       });
-    }else {
+    } else {
+      // intilization for correctly showing qr --> starts here
       const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
       const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
         scene,
@@ -1253,21 +1255,41 @@ function showModel(item) {
           deviceId: "",
         }
       );
+      var plane = BABYLON.MeshBuilder.CreatePlane(
+        "plane",
+        { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
+        scene
+      );
+      var mat = new BABYLON.StandardMaterial("", scene);
+      mat.diffuseTexture = new BABYLON.Texture(
+        "./assets/iPhone13Pro/qr.png",
+        scene
+      );
+      plane.material = mat;
+
+      plane.scaling.z = 0.01;
+      plane.position.z = 1;
+      plane.position.y = 1;
+      plane.position.x = -3;
+
+      plane.parent = camera;
+      camera.minZ = 0;
+      // intilization for correctly showing qr --> ends here
       // show qr code as top layer
       if (path && showQR) {
-       var plane = BABYLON.MeshBuilder.CreatePlane(
+        var plane = BABYLON.MeshBuilder.CreatePlane(
           "plane",
           { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
           scene
         );
         var mat = new BABYLON.StandardMaterial("", scene);
         mat.diffuseTexture = new BABYLON.Texture(path, scene);
-         plane.material = mat;
+        plane.material = mat;
 
         plane.scaling.z = 0.01;
-        plane.position.z = 10;
-        plane.position.y = 0;
-        plane.position.x = -3;
+        plane.position.z = 20;
+        plane.position.y = 2;
+        plane.position.x = -8;
 
         plane.parent = camera;
         camera.minZ = 0;
@@ -1280,7 +1302,6 @@ function showModel(item) {
             videoTexture._invertY = false;
             videoTexture;
             videoLayer.texture = videoTexture;
-            
           },
           {
             minWidth: 640,
@@ -1344,7 +1365,6 @@ function showModel(item) {
 
       walkRotation.x = parseFloat(0.083);
       walkRotation.y = parseFloat(4.5);
-
     });
 
   // Watch for charging port click events
@@ -1357,16 +1377,15 @@ function showModel(item) {
 
       walkRotation.x = parseFloat(-1.45);
       walkRotation.y = parseFloat(2.66);
-
     });
 
   // Watch for model change and dispose the model
   document
-  .getElementById("refreshModel")
-  .addEventListener("click", function () {
-    var walk = scene.getMeshByName("__root__");
-    walk.dispose();
-  });
+    .getElementById("refreshModel")
+    .addEventListener("click", function () {
+      var walk = scene.getMeshByName("__root__");
+      walk.dispose();
+    });
 }
 
 startCallSession();
