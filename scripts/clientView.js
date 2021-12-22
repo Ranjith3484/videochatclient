@@ -29,7 +29,7 @@ function startCallSession() {
           console.log("canv source: ", userMediaStream.getAudioTracks()); // prints  []
         });
 
-      signaling = new WebSocket("wss://1videochat-app-bj.herokuapp.com");
+      signaling = new WebSocket("wss://videochat-app-bj.herokuapp.com");
 
       setTimeout(function () {
         peerConnection = createPeerConnection();
