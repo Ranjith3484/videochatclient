@@ -29,7 +29,7 @@ function startCallSession() {
           console.log("canv source: ", userMediaStream.getAudioTracks()); // prints  []
         });
 
-      signaling = new WebSocket("wss://videochat-app-bj.herokuapp.com");
+      signaling = new WebSocket("wss://1videochat-app-bj.herokuapp.com");
 
       setTimeout(function () {
         peerConnection = createPeerConnection();
@@ -717,6 +717,16 @@ function showDeviceImage(item) {
     }
   }
 
+
+  var j, tab;
+  //removing active style for features section
+  tab = document.getElementsByClassName("featuresText");
+  for (j = 0; j < tab.length; j++) {
+    tab[j].style.fontSize = "28px";
+    tab[j].style.fontWejght = "normal";
+    tab[j].style.borderBottom = "2px solid #bfbfbf";
+  }
+
   //adding html content for showing device image and by default show first variant
   var showCase = "<div>";
   showCase +=
@@ -765,8 +775,8 @@ function showDeviceImage(item) {
   //end of variant listing
   showCase += variantList;
   showCase += "</div>";
- //  showCase +=
- //    "<button class='outlinedButton' onclick='shareDevice()'>Share</button>";
+   showCase +=
+     "<button class='outlinedButton' onclick='shareDevice()'>Share</button>";
   showCase += "</div>";
   document.getElementById("deviceShowCase").innerHTML = showCase;
    document.getElementById("refreshModel").click();
@@ -1028,8 +1038,9 @@ var walkPosition = {
 }
 
 var walkScaling = {
-  x:1,
-  y:1
+  x:0.9,
+  y:0.9,
+  z:-1
 }
 
 function showModel(item) {
@@ -1089,11 +1100,13 @@ function showModel(item) {
             case "Z":
               walk.scaling.x += 0.1;
               walk.scaling.y += 0.1;
+              walk.scaling.z -= 0.1;
               break;
             case "u":
             case "U":
               walk.scaling.x -= 0.1;
               walk.scaling.y -= 0.1;
+              walk.scaling.z += 0.1;
               break;
           }
       }
@@ -1102,6 +1115,7 @@ function showModel(item) {
 
       walkScaling.x = parseFloat(walk.scaling.x);
       walkScaling.y = parseFloat(walk.scaling.y);
+      walkScaling.z = parseFloat(walk.scaling.z);
 
     });
 
@@ -1171,6 +1185,10 @@ function showModel(item) {
          walk.position.x = -2.5;
          walk.position.y = 0.5;
 
+         walk.scaling.z = -1;
+         walk.scaling.x = 0.9;
+         walk.scaling.y = 0.9;
+
         // if (changeVariant && walk !== null) {
         //   //set to previous position, if variant changed
         //   walk.rotation.x = parseFloat(walkRotation.x);
@@ -1179,6 +1197,7 @@ function showModel(item) {
         //   walk.position.y = parseFloat(walkPosition.y);
         //   walk.scaling.x = parseFloat(walkScaling.x);
         //   walk.scaling.y = parseFloat(walkScaling.y);
+        //   walk.scaling.z = parseFloat(walkScaling.z);
         // } else{
         //   //set to default values  while changing model
         //   walkPosition.x =  -2.5;
@@ -1187,6 +1206,7 @@ function showModel(item) {
         //   walkRotation.y = 0;
         //   walkScaling.x = 1;
         //   walkScaling.y = 1;
+        //   walkScaling.z = -1;
         // }
 
         //pushing rotation object to enable camera features
@@ -1194,6 +1214,9 @@ function showModel(item) {
 
         //pushing position object to enable camera features
         walk.position = new BABYLON.Vector3(walk.position.x, walk.position.y);
+
+        //pushing scaling object to enable camera features
+        walk.scaling = new BABYLON.Vector3(walk.scaling.x, walk.scaling.y, walk.scaling.z);
 
         const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
         const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
@@ -1230,6 +1253,44 @@ function showModel(item) {
           deviceId: "",
         }
       );
+      // show qr code as top layer
+      if (path && showQR) {
+       var plane = BABYLON.MeshBuilder.CreatePlane(
+          "plane",
+          { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
+          scene
+        );
+        var mat = new BABYLON.StandardMaterial("", scene);
+        mat.diffuseTexture = new BABYLON.Texture(path, scene);
+         plane.material = mat;
+
+        plane.scaling.z = 0.01;
+        plane.position.z = 10;
+        plane.position.y = 0;
+        plane.position.x = -3;
+
+        plane.parent = camera;
+        camera.minZ = 0;
+      } else {
+        // show only video
+        const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
+        const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
+          scene,
+          (videoTexture) => {
+            videoTexture._invertY = false;
+            videoTexture;
+            videoLayer.texture = videoTexture;
+            
+          },
+          {
+            minWidth: 640,
+            minHeight: 480,
+            maxWidth: 1920,
+            maxHeight: 1080,
+            deviceId: "",
+          }
+        );
+      }
     }
     scene.clearColor = new BABYLON.Color4(0, 0, 0, 0.0000000000000001);
     document.getElementById("render3DModel").focus();
