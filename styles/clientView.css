@@ -631,7 +631,7 @@ table{
     color:#666;
     margin-left: 15%;
     margin-top: 5px;
-    cursor: pointer;
+    cursor: not-allowed;
 }
 
 .outlinedButton:hover{

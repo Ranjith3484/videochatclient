@@ -775,7 +775,7 @@ function showDeviceImage(item) {
   showCase += variantList;
   showCase += "</div>";
   showCase +=
-    "<button class='outlinedButton' onclick='shareDevice()'>Share</button>";
+    "<button class='outlinedButton' onclick='shareDevice()' id='shareQR' disabled='true'>Share</button>";
   showCase += "</div>";
   document.getElementById("deviceShowCase").innerHTML = showCase;
   document.getElementById("refreshModel").click();
@@ -1046,6 +1046,13 @@ function showModel(item) {
   var path = item.path;
   var showQR = item.showQR;
   var changeVariant = item.changeVariant;
+  var shareQRDevice = document.getElementById("shareQR");
+  console.log(shareQRDevice, "--0");
+  //disable the share device button before model loading
+  if (shareQRDevice !== null) {
+    shareQRDevice.disabled = true;
+    shareQRDevice.style.cursor = "not-allowed";
+  }
 
   //show 3d model
   const modelCanvas = document.getElementById("render3DModel"); // Get the canvas element
@@ -1174,8 +1181,14 @@ function showModel(item) {
       // show 3d model as top layer
       BABYLON.SceneLoader.Append("./", path, scene, function (scene) {
         scene.createDefaultCameraOrLight(false, true, false);
-
+       
         var walk = scene.getMeshByName("__root__");
+
+        setTimeout(function () { //manual delay to avoid any meshes
+          //enable the share device button once model loaded
+          shareQRDevice.disabled = false;
+          shareQRDevice.style.cursor = "pointer";
+        }, 2000)
 
         //initialize the model position
 
@@ -1236,6 +1249,7 @@ function showModel(item) {
           }
         );
         videoTexture.video.muted = true;
+        
       });
     } else {
       // intilization for correctly showing qr --> starts here
