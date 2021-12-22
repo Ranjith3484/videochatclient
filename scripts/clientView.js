@@ -1269,25 +1269,25 @@ function showModel(item) {
           deviceId: "",
         }
       );
-      var plane = BABYLON.MeshBuilder.CreatePlane(
-        "plane",
-        { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
-        scene
-      );
-      var mat = new BABYLON.StandardMaterial("", scene);
-      mat.diffuseTexture = new BABYLON.Texture(
-        "./assets/iPhone13Pro/qr.png",
-        scene
-      );
-      plane.material = mat;
+      // var plane = BABYLON.MeshBuilder.CreatePlane(
+      //   "plane",
+      //   { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
+      //   scene
+      // );
+      // var mat = new BABYLON.StandardMaterial("", scene);
+      // mat.diffuseTexture = new BABYLON.Texture(
+      //   "./assets/iPhone13Pro/qr.png",
+      //   scene
+      // );
+      // plane.material = mat;
 
-      plane.scaling.z = 0.01;
-      plane.position.z = 1;
-      plane.position.y = 1;
-      plane.position.x = -3;
+      // plane.scaling.z = 0.01;
+      // plane.position.z = 1;
+      // plane.position.y = 1;
+      // plane.position.x = -3;
 
-      plane.parent = camera;
-      camera.minZ = 0;
+      // plane.parent = camera;
+      // camera.minZ = 0;
       // intilization for correctly showing qr --> ends here
       // show qr code as top layer
       if (path && showQR) {
@@ -1300,10 +1300,14 @@ function showModel(item) {
         mat.diffuseTexture = new BABYLON.Texture(path, scene);
         plane.material = mat;
 
+        // plane.scaling.z = 0.01;
+        // plane.position.z = 20;
+        // plane.position.y = 2;
+        // plane.position.x = -8;
         plane.scaling.z = 0.01;
-        plane.position.z = 20;
-        plane.position.y = 2;
-        plane.position.x = -8;
+        plane.position.z = 10;
+        plane.position.y = 1;
+        plane.position.x = -3;
 
         plane.parent = camera;
         camera.minZ = 0;
