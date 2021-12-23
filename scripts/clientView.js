@@ -505,7 +505,7 @@ var devicesBrands = [
           {
             color: "#a8c6e0",
             image: "./assets/iPhone13Pro/iPhone13Pro_blue.jpeg",
-            model: "./assets/iPhone13Pro/iPhone13Pro_blue-old.glb",
+            model: "./assets/iPhone13Pro/iPhone13Pro_blue.glb",
             webLink: "https://www.apple.com/in/iphone/",
             qrLink: "./assets/iPhone13Pro/qr.png",
             active: true,
@@ -515,14 +515,14 @@ var devicesBrands = [
             image: "./assets/iPhone13Pro/iPhone13Pro_gold.jpeg",
             model: "./assets/iPhone13Pro/iPhone13Pro_gold.glb",
             webLink: "https://www.apple.com/in/iphone/",
-            qrLink: "./assets/iPhone13Pro/qr.png"
+            qrLink: "./assets/iPhone13Pro/qr.png",
           },
           {
             color: "#383428",
             image: "./assets/iPhone13Pro/iPhone13Pro_graphite.jpeg",
             model: "./assets/iPhone13Pro/iPhone13Pro_graphite.glb",
             webLink: "https://www.apple.com/in/iphone/",
-            qrLink: "./assets/iPhone13Pro/qr.png"
+            qrLink: "./assets/iPhone13Pro/qr.png",
           },
         ],
       },
@@ -954,84 +954,84 @@ function init() {
   // );
 }
 
-//change annotate color
-function changeAnnotateColor(item) {
-  var i, tab;
-  //removing active style
-  tab = document.getElementsByClassName("annotateCircle");
-  for (i = 0; i < tab.length; i++) {
-    tab[i].style.border = "none";
-  }
-  //add active style
-  document.getElementById("annotate" + item).style.border = "1px solid white";
-  localStorage.setItem("annotateColor", item);
-  color(item);
-}
+// //change annotate color
+// function changeAnnotateColor(item) {
+//   var i, tab;
+//   //removing active style
+//   tab = document.getElementsByClassName("annotateCircle");
+//   for (i = 0; i < tab.length; i++) {
+//     tab[i].style.border = "none";
+//   }
+//   //add active style
+//   document.getElementById("annotate" + item).style.border = "1px solid white";
+//   localStorage.setItem("annotateColor", item);
+//   color(item);
+// }
 
-function color(obj) {
-  switch (obj) {
-    case "red":
-      x = "red";
-      break;
-    case "black":
-      x = "black";
-      break;
-    case "white":
-      x = "white";
-      break;
-  }
-}
+// function color(obj) {
+//   switch (obj) {
+//     case "red":
+//       x = "red";
+//       break;
+//     case "black":
+//       x = "black";
+//       break;
+//     case "white":
+//       x = "white";
+//       break;
+//   }
+// }
 
-function changeWidth() {
-  y = document.getElementById("myRange").value / 8;
-}
+// function changeWidth() {
+//   y = document.getElementById("myRange").value / 8;
+// }
 
-function draw() {
-  ctx.beginPath();
-  ctx.moveTo(prevX, prevY);
-  ctx.lineTo(currX, currY);
-  ctx.strokeStyle = x;
-  ctx.lineWidth = y;
-  ctx.stroke();
-  ctx.closePath();
-  ctx.lineCap = "round";
+// function draw() {
+//   ctx.beginPath();
+//   ctx.moveTo(prevX, prevY);
+//   ctx.lineTo(currX, currY);
+//   ctx.strokeStyle = x;
+//   ctx.lineWidth = y;
+//   ctx.stroke();
+//   ctx.closePath();
+//   ctx.lineCap = "round";
 
-  setTimeout(function () {
-    ctx.clearRect(0, 0, w, h);
-    document.getElementById("canvasimg").style.display = "none";
-  }, 5000);
-}
+//   setTimeout(function () {
+//     ctx.clearRect(0, 0, w, h);
+//     document.getElementById("canvasimg").style.display = "none";
+//   }, 5000);
+// }
 
-function findxy(res, e) {
-  if (res == "down") {
-    prevX = currX;
-    prevY = currY;
-    currX = e.clientX - canvas.offsetLeft;
-    currY = e.clientY - canvas.offsetTop;
+// function findxy(res, e) {
+//   if (res == "down") {
+//     prevX = currX;
+//     prevY = currY;
+//     currX = e.clientX - canvas.offsetLeft;
+//     currY = e.clientY - canvas.offsetTop;
 
-    flag = true;
-    dot_flag = true;
-    if (dot_flag) {
-      ctx.beginPath();
-      ctx.fillStyle = x;
-      ctx.fillRect(currX, currY, 2, 2);
-      ctx.closePath();
-      dot_flag = false;
-    }
-  }
-  if (res == "up" || res == "out") {
-    flag = false;
-  }
-  if (res == "move") {
-    if (flag) {
-      prevX = currX;
-      prevY = currY;
-      currX = e.clientX - canvas.offsetLeft;
-      currY = e.clientY - canvas.offsetTop;
-      draw();
-    }
-  }
-}
+//     flag = true;
+//     dot_flag = true;
+//     if (dot_flag) {
+//       ctx.beginPath();
+//       ctx.fillStyle = x;
+//       ctx.fillRect(currX, currY, 2, 2);
+//       ctx.closePath();
+//       dot_flag = false;
+//     }
+//   }
+//   if (res == "up" || res == "out") {
+//     flag = false;
+//   }
+//   if (res == "move") {
+//     if (flag) {
+//       prevX = currX;
+//       prevY = currY;
+//       currX = e.clientX - canvas.offsetLeft;
+//       currY = e.clientY - canvas.offsetTop;
+//       draw();
+//     }
+//   }
+// }
 
 //initial call to show webcam
 showModel({
@@ -1194,14 +1194,15 @@ function showModel(item) {
       // show 3d model as top layer
       BABYLON.SceneLoader.Append("./", path, scene, function (scene) {
         scene.createDefaultCameraOrLight(false, true, false);
-       
+
         var walk = scene.getMeshByName("__root__");
 
-        setTimeout(function () { //manual delay to avoid any meshes
+        setTimeout(function () {
+          //manual delay to avoid any meshes
           //enable the share device button once model loaded
           shareQRDevice.disabled = false;
           shareQRDevice.style.cursor = "pointer";
-        }, 2000)
+        }, 2000);
 
         //initialize the model position
 
@@ -1221,10 +1222,10 @@ function showModel(item) {
           walk.scaling.x = parseFloat(walkScaling.x);
           walk.scaling.y = parseFloat(walkScaling.y);
           walk.scaling.z = parseFloat(walkScaling.z);
-        } else{
+        } else {
           //set to default values  while changing model
-          walkPosition.x =  -2.5;
-          walkPosition.y =  0.5;
+          walkPosition.x = -2.5;
+          walkPosition.y = 0.5;
           walkRotation.x = 0;
           walkRotation.y = 0;
           walkScaling.x = 1;
@@ -1262,7 +1263,6 @@ function showModel(item) {
           }
         );
         videoTexture.video.muted = true;
-        
       });
     } else {
       // intilization for correctly showing qr --> starts here
@@ -1283,9 +1283,49 @@ function showModel(item) {
         }
       );
       if (path && showQR) {
+          // add text below qr code
+          var textPlane = BABYLON.MeshBuilder.CreatePlane(
+            "textPlane",
+            { height: 0.5, width: 2, sideOrientation: BABYLON.Mesh.SINGLESIDE },
+            scene
+          );
+          var textureGround = new BABYLON.DynamicTexture(
+            "dynamic texture",
+            { width: 512, height: 120},
+            scene
+          );
+  
+          var textMaterial = new BABYLON.StandardMaterial("Mat", scene);
+          textMaterial.diffuseTexture = textureGround;
+          textPlane.material = textMaterial;
+  
+          textPlane.scaling.z = 0.01;
+          textPlane.position.z = 10;
+          textPlane.position.y = 0;
+          textPlane.position.x = -4;
+          textPlane.scaling.x = -1;
+          textPlane.scaling.y = -1;
+  
+          textPlane.parent = camera;
+          camera.minZ = 0;
+  
+          //Add text to dynamic texture
+          var font = "bold 33px monospace";
+          textureGround.drawText(
+            "   Scan to explore more",
+            5,
+            100,
+            font,
+            "black",
+            "white",
+            true,
+            true
+          );
+          // text ends here
+        // add qr code
         var plane = BABYLON.MeshBuilder.CreatePlane(
           "plane",
-          { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE},
+          { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
           scene
         );
         var mat = new BABYLON.StandardMaterial("", scene);
@@ -1300,8 +1340,9 @@ function showModel(item) {
         plane.scaling.y = -1;
 
         plane.parent = camera;
-        camera.minZ = 0;  
-        
+        camera.minZ = 0;
+
+      
       } else {
         // show only video
         const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
@@ -1326,8 +1367,6 @@ function showModel(item) {
     document.getElementById("render3DModel").focus();
     return scene;
   };
-
-
 
   const scene = createScene();
 
@@ -1394,18 +1433,17 @@ function showModel(item) {
   document
     .getElementById("refreshModel")
     .addEventListener("click", function () {
-
       //dispose sceneloader
       var walk = scene.getMeshByName("__root__");
-     if(walk !== null){
-      walk.dispose();
-     }
+      if (walk !== null) {
+        walk.dispose();
+      }
 
       //dispose plane
       var plane = scene.getMeshByName("plane");
-     if(plane !== null){
-      plane.dispose();
-     }
+      if (plane !== null) {
+        plane.dispose();
+      }
     });
 }
 
