@@ -1295,12 +1295,13 @@ function showModel(item) {
         plane.scaling.z = 0.01;
         plane.position.z = 10;
         plane.position.y = 1;
-        plane.position.x = -3;
-        plane.scaling.x = 1;
+        plane.position.x = -4;
+        plane.scaling.x = -1;
         plane.scaling.y = -1;
 
         plane.parent = camera;
-        camera.minZ = 0;      
+        camera.minZ = 0;  
+        
       } else {
         // show only video
         const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
