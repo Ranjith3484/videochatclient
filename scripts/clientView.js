@@ -1100,19 +1100,19 @@ function showModel(item) {
         case BABYLON.KeyboardEventTypes.KEYDOWN:
           switch (kbInfo.event.key) {
             case "a":
-            case "A":
+            case "ArrowLeft":
               walk.position.x -= 0.1;
               break;
             case "d":
-            case "D":
+            case "ArrowRight":
               walk.position.x += 0.1;
               break;
             case "w":
-            case "W":
+            case "ArrowUp":
               walk.position.y += 0.1;
               break;
             case "s":
-            case "S":
+            case "ArrowDown":
               walk.position.y -= 0.1;
               break;
             case "z":
