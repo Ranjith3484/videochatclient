@@ -505,10 +505,24 @@ var devicesBrands = [
           {
             color: "#a8c6e0",
             image: "./assets/iPhone13Pro/iPhone13Pro_blue.jpeg",
-            model: "./assets/iPhone13Pro/iPhone13Pro_blue.glb",
+            model: "./assets/iPhone13Pro/iPhone13Pro_blue-old.glb",
             webLink: "https://www.apple.com/in/iphone/",
             qrLink: "./assets/iPhone13Pro/qr.png",
             active: true,
+          },
+          {
+            color: "#F6E0C9",
+            image: "./assets/iPhone13Pro/iPhone13Pro_gold.jpeg",
+            model: "./assets/iPhone13Pro/iPhone13Pro_gold.glb",
+            webLink: "https://www.apple.com/in/iphone/",
+            qrLink: "./assets/iPhone13Pro/qr.png"
+          },
+          {
+            color: "#383428",
+            image: "./assets/iPhone13Pro/iPhone13Pro_graphite.jpeg",
+            model: "./assets/iPhone13Pro/iPhone13Pro_graphite.glb",
+            webLink: "https://www.apple.com/in/iphone/",
+            qrLink: "./assets/iPhone13Pro/qr.png"
           },
         ],
       },
@@ -1047,7 +1061,6 @@ function showModel(item) {
   var showQR = item.showQR;
   var changeVariant = item.changeVariant;
   var shareQRDevice = document.getElementById("shareQR");
-  console.log(shareQRDevice, "--0");
   //disable the share device button before model loading
   if (shareQRDevice !== null) {
     shareQRDevice.disabled = true;
@@ -1199,25 +1212,25 @@ function showModel(item) {
         walk.scaling.x = 0.9;
         walk.scaling.y = 0.9;
 
-        // if (changeVariant && walk !== null) {
-        //   //set to previous position, if variant changed
-        //   walk.rotation.x = parseFloat(walkRotation.x);
-        //   walk.rotation.y = parseFloat(walkRotation.y);
-        //   walk.position.x = parseFloat(walkPosition.x);
-        //   walk.position.y = parseFloat(walkPosition.y);
-        //   walk.scaling.x = parseFloat(walkScaling.x);
-        //   walk.scaling.y = parseFloat(walkScaling.y);
-        //   walk.scaling.z = parseFloat(walkScaling.z);
-        // } else{
-        //   //set to default values  while changing model
-        //   walkPosition.x =  -2.5;
-        //   walkPosition.y =  0.5;
-        //   walkRotation.x = 0;
-        //   walkRotation.y = 0;
-        //   walkScaling.x = 1;
-        //   walkScaling.y = 1;
-        //   walkScaling.z = -1;
-        // }
+        if (changeVariant && walk !== null) {
+          //set to previous position, if variant changed
+          walk.rotation.x = parseFloat(walkRotation.x);
+          walk.rotation.y = parseFloat(walkRotation.y);
+          walk.position.x = parseFloat(walkPosition.x);
+          walk.position.y = parseFloat(walkPosition.y);
+          walk.scaling.x = parseFloat(walkScaling.x);
+          walk.scaling.y = parseFloat(walkScaling.y);
+          walk.scaling.z = parseFloat(walkScaling.z);
+        } else{
+          //set to default values  while changing model
+          walkPosition.x =  -2.5;
+          walkPosition.y =  0.5;
+          walkRotation.x = 0;
+          walkRotation.y = 0;
+          walkScaling.x = 1;
+          walkScaling.y = 1;
+          walkScaling.z = -1;
+        }
 
         //pushing rotation object to enable camera features
         walk.rotation = new BABYLON.Vector3(walk.rotation.x, walk.rotation.y);
@@ -1269,48 +1282,25 @@ function showModel(item) {
           deviceId: "",
         }
       );
-      // var plane = BABYLON.MeshBuilder.CreatePlane(
-      //   "plane",
-      //   { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
-      //   scene
-      // );
-      // var mat = new BABYLON.StandardMaterial("", scene);
-      // mat.diffuseTexture = new BABYLON.Texture(
-      //   "./assets/iPhone13Pro/qr.png",
-      //   scene
-      // );
-      // plane.material = mat;
-
-      // plane.scaling.z = 0.01;
-      // plane.position.z = 1;
-      // plane.position.y = 1;
-      // plane.position.x = -3;
-
-      // plane.parent = camera;
-      // camera.minZ = 0;
-      // intilization for correctly showing qr --> ends here
-      // show qr code as top layer
       if (path && showQR) {
         var plane = BABYLON.MeshBuilder.CreatePlane(
           "plane",
-          { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE },
+          { height: 4, width: 4, sideOrientation: BABYLON.Mesh.SINGLESIDE},
           scene
         );
         var mat = new BABYLON.StandardMaterial("", scene);
         mat.diffuseTexture = new BABYLON.Texture(path, scene);
         plane.material = mat;
 
-        // plane.scaling.z = 0.01;
-        // plane.position.z = 20;
-        // plane.position.y = 2;
-        // plane.position.x = -8;
         plane.scaling.z = 0.01;
         plane.position.z = 10;
         plane.position.y = 1;
         plane.position.x = -3;
+        plane.scaling.x = 1;
+        plane.scaling.y = -1;
 
         plane.parent = camera;
-        camera.minZ = 0;
+        camera.minZ = 0;      
       } else {
         // show only video
         const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
@@ -1335,6 +1325,8 @@ function showModel(item) {
     document.getElementById("render3DModel").focus();
     return scene;
   };
+
+
 
   const scene = createScene();
 
@@ -1401,8 +1393,18 @@ function showModel(item) {
   document
     .getElementById("refreshModel")
     .addEventListener("click", function () {
+
+      //dispose sceneloader
       var walk = scene.getMeshByName("__root__");
+     if(walk !== null){
       walk.dispose();
+     }
+
+      //dispose plane
+      var plane = scene.getMeshByName("plane");
+     if(plane !== null){
+      plane.dispose();
+     }
     });
 }
 
