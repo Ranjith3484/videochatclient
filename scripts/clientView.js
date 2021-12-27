@@ -86,7 +86,7 @@ function startCallSession() {
     pc.ontrack = (event) => {
       const video = document.getElementById("customerVideoElement");
       video.srcObject = event.streams[0];
-      console.log("live streaming-->");
+      console.log("live streaming--->");
     };
 
     pc.ondatachannel = (event) => {
