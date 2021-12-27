@@ -503,23 +503,23 @@ var devicesBrands = [
         displayName: "Apple iPhone 13 Pro",
         variant: [
           {
-            color: "#a8c6e0",
-            image: "./assets/iPhone13Pro/iPhone13Pro_blue.jpeg",
+            color: "#9aafca",
+            image: "./assets/iPhone13Pro/iPhone13Pro_Blue.png",
             model: "./assets/iPhone13Pro/iPhone13Pro_blue.glb",
             webLink: "https://www.apple.com/in/iphone/",
             qrLink: "./assets/iPhone13Pro/qr.png",
             active: true,
           },
           {
-            color: "#F6E0C9",
-            image: "./assets/iPhone13Pro/iPhone13Pro_gold.jpeg",
+            color: "#f5e1c8",
+            image: "./assets/iPhone13Pro/iPhone13Pro_Gold.png",
             model: "./assets/iPhone13Pro/iPhone13Pro_gold.glb",
             webLink: "https://www.apple.com/in/iphone/",
             qrLink: "./assets/iPhone13Pro/qr.png",
           },
           {
-            color: "#383428",
-            image: "./assets/iPhone13Pro/iPhone13Pro_graphite.jpeg",
+            color: "#4c4a46",
+            image: "./assets/iPhone13Pro/iPhone13Pro_Graphite.png",
             model: "./assets/iPhone13Pro/iPhone13Pro_graphite.glb",
             webLink: "https://www.apple.com/in/iphone/",
             qrLink: "./assets/iPhone13Pro/qr.png",
@@ -588,16 +588,37 @@ var devicesBrands = [
       //   ],
       // },
       {
-        name: "Galaxy Z Flip",
-        displayName: "Samsung Galaxy Z Flip",
+        name: "Galaxy Z Flip3",
+        displayName: "Samsung Galaxy Z Flip3",
         variant: [
           {
             color: "black",
-            image: "./assets/samsungZFlip/black.jpeg",
-            model: "./assets/samsungZFlip/SamsungZFlip_Black.glb",
+            image: "./assets/samsungZFlip3/Zflip3_Black.png",
+            model: "./assets/samsungZFlip3/Zflip3_Black.glb",
             webLink: "https://www.samsung.com/in/smartphones/galaxy-z-flip/",
-            qrLink: "./assets/samsungZFlip/qr.png",
+            qrLink: "./assets/samsungZFlip3/qr.png",
             active: true,
+          },
+          {
+            color: "#f7f4d3",
+            image: "./assets/samsungZFlip3/Zflip3_Cream.png",
+            model: "./assets/samsungZFlip3/Zflip3_Cream.glb",
+            webLink: "https://www.samsung.com/in/smartphones/galaxy-z-flip/",
+            qrLink: "./assets/samsungZFlip3/qr.png"
+          },
+          {
+            color: "#57666a",
+            image: "./assets/samsungZFlip3/Zflip3_Green.png",
+            model: "./assets/samsungZFlip3/Zflip3_Green.glb",
+            webLink: "https://www.samsung.com/in/smartphones/galaxy-z-flip/",
+            qrLink: "./assets/samsungZFlip3/qr.png"
+          },
+          {
+            color: "#c2b1d7",
+            image: "./assets/samsungZFlip3/Zflip3_Lavender.png",
+            model: "./assets/samsungZFlip3/Zflip3_Lavender.glb",
+            webLink: "https://www.samsung.com/in/smartphones/galaxy-z-flip/",
+            qrLink: "./assets/samsungZFlip3/qr.png"
           },
         ],
       },
@@ -642,12 +663,26 @@ var devicesBrands = [
         displayName: "Google Pixel 6 Pro",
         variant: [
           {
-            color: "#343539",
-            image: "./assets/pixel6Pro/pixel6_pro_black.jpeg",
-            model: "./assets/pixel6Pro/pixel6_pro_black.glb",
+            color: "#343538",
+            image: "./assets/pixel6Pro/pixel6Pro_StormyBlack.png",
+            model: "./assets/pixel6Pro/pixel6Pro_StormyBlack.glb",
             webLink: "https://www.samsung.com/us/smartphones/galaxy-a42-5g/",
             qrLink: "./assets/pixel6Pro/qr.png",
             active: true,
+          },
+          {
+            color: "#e9e4e0",
+            image: "./assets/pixel6Pro/pixel6Pro_CloudyWhite.png",
+            model: "./assets/pixel6Pro/pixel6Pro_CloudyWhite.glb",
+            webLink: "https://www.samsung.com/us/smartphones/galaxy-a42-5g/",
+            qrLink: "./assets/pixel6Pro/qr.png"
+          },
+          {
+            color: "#fbf2d1",
+            image: "./assets/pixel6Pro/pixel6Pro_SortaSunny.png",
+            model: "./assets/pixel6Pro/pixel6Pro_SortaSunny.glb",
+            webLink: "https://www.samsung.com/us/smartphones/galaxy-a42-5g/",
+            qrLink: "./assets/pixel6Pro/qr.png"
           },
         ],
       },
