@@ -145,7 +145,8 @@
     .customerViewContainer{
         width: 100%;
         height: 100%;
-        overflow: scroll;
+        /* overflow: scroll; */
+  overflow: auto;
     }
     .customerViewRow{
         padding: 0px;
