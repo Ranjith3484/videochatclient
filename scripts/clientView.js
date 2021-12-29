@@ -722,10 +722,10 @@ function showDevices(item) {
   for (let i of devices) {
     deviceList += `<ul onclick="showDeviceImage('${
       i.name
-    }')" style="margin-bottom:0px;width:100%"><h6 class="deviceNames" id="${
+    }')" style="margin-bottom:0px;width:100%;"><h6 class="deviceNames" id="${
       i.name
     }"  style="border-bottom:${
-      i.name == localStorage.getItem("showingDevice") ? "4px solid red" : ""
+      i.name == localStorage.getItem("showingDevice") ? "4px solid red" : "4px solid white"
     }">${i.name}</h6></ul>`;
   }
   deviceList += "</span></div>";
@@ -1242,7 +1242,7 @@ function showModel(item) {
         //initialize the model position
 
         walk.position.x = -2.5;
-        walk.position.y = 0.5;
+        walk.position.y = 0.2;
 
         walk.scaling.z = -1;
         walk.scaling.x = 0.9;
@@ -1260,7 +1260,7 @@ function showModel(item) {
         } else {
           //set to default values  while changing model
           walkPosition.x = -2.5;
-          walkPosition.y = 0.5;
+          walkPosition.y = 0.2;
           walkRotation.x = 0;
           walkRotation.y = 0;
           walkScaling.x = 1;
