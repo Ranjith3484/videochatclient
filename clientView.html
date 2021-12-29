@@ -16,6 +16,7 @@
 
   <div>
     <div>
+      <!-- side nave menu bar -->
     <div class="sideNavContainer">
       <div class="tabOuter" onclick="openSideBarAndTab(event,'apps')">
         <a class="notification">
@@ -23,10 +24,12 @@
         </a>
       </div>
     </div>
+    <!-- side nav container -->
     <div id="mySidenav" class="sidenav hideElement">
       <div class="sideNavCloseIcon" onclick="openCloseNav()">
         <i class="fa fa-close icon grey"></i>
       </div>
+      <!-- side nave header tabs -->
       <div class="sideNavHeader">
         <div class="tabLinks activeBorderBlue" onclick="openTab(event, 'people')" id="peopleTabLink">
           <a class="notification">
@@ -38,7 +41,6 @@
         <div class="tabLinks" onclick="openTab(event, 'chat')" id="chatTabLink">
           <a class="notification">
             <i class="fa fa-comment-o icon" id="chatTabIcon"></i>
-            <!-- <span class="badge">1</span> -->
           </a>
           <p class="iconText" id="chatTabText">CHAT</p>
         </div>
@@ -189,14 +191,17 @@
         <p>settings</p>
       </div>
     </div>
+    <!-- features container opener -->
     <div class="sideFeaturesContainer" onclick="openCloseFeatures()" id="sideFeaturesOpener">
       <div class="featureButton">
         <i class="fa fa-chevron-left featureIcon"></i>
       </div>
     </div>
+    <!-- features container -->
     <div id="myFeaturesHolder" class="featuresHolder hideElement">
       <div class="featuresRow">
         <div class="featuresLargeColumn">
+          <!-- features holder -->
          <div class="featuresContent" id="camera">
           <div class="featuresText" id="showFrontCamera" onclick="showDeviceFeature('FrontCamera')">Front Camera</div>
           <div class="featuresText" id="showBackCamera" onclick="showDeviceFeature('BackCamera')">Back Camera</div>
@@ -213,6 +218,7 @@
         </div>
           <div class="borderFeature"></div>
          </div>
+         <!-- features tab icon -->
           <div class="featuresTabHolder">
              <i class="fa fa-camera featureTabIcon activeFeature" onclick="openFeatureTab(event, 'camera')" id="cameraFeatures"></i>
              <!-- <i class="fa fa-pencil featureTabIcon" onclick="openFeatureTab(event, 'annotate')"></i> -->
@@ -224,6 +230,7 @@
       </div>
     </div>
     </div>
+    <!-- video chat container -->
     <div class="container">
       <!-- self-view -->
       <div class="clientCover">

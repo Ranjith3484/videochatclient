@@ -198,7 +198,7 @@ function endCall() {
   //stop all tracks
   mediaTracks.forEach((track) => track.stop());
 }
-
+//scale drone api for passing information
 const CLIENT_ID = "LT31hadz55oFVVvT";
 
 const drone = new ScaleDrone(CLIENT_ID, {
@@ -880,6 +880,9 @@ function changeVariant(item) {
 
 function shareDevice() {
   document.getElementById("refreshModel").click();
+  // hide features opener while sharing qr code
+  document.getElementsByClassName("sideFeaturesContainer")[0].style.display =
+  "none";
   showModel({
     path: localStorage.getItem("showingDeviceQRLink"),
     showQR: true,
