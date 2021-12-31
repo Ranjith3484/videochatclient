@@ -594,7 +594,7 @@ var devicesBrands = [
           {
             color: "black",
             image: "./assets/samsungZFlip3/Zflip3_Black.png",
-            model: "./assets/samsungZFlip3/Zflip3_Black.glb",
+            model: "./assets/samsungZFlip3/Zflip3_Black_Animated.glb",
             webLink: "https://www.samsung.com/in/smartphones/galaxy-z-flip/",
             qrLink: "./assets/samsungZFlip3/qr.png",
             active: true,
@@ -602,21 +602,21 @@ var devicesBrands = [
           {
             color: "#f7f4d3",
             image: "./assets/samsungZFlip3/Zflip3_Cream.png",
-            model: "./assets/samsungZFlip3/Zflip3_Cream.glb",
+            model: "./assets/samsungZFlip3/Zflip3_Cream_Animated.glb",
             webLink: "https://www.samsung.com/in/smartphones/galaxy-z-flip/",
             qrLink: "./assets/samsungZFlip3/qr.png"
           },
           {
             color: "#57666a",
             image: "./assets/samsungZFlip3/Zflip3_Green.png",
-            model: "./assets/samsungZFlip3/Zflip3_Green.glb",
+            model: "./assets/samsungZFlip3/Zflip3_Green_Animated.glb",
             webLink: "https://www.samsung.com/in/smartphones/galaxy-z-flip/",
             qrLink: "./assets/samsungZFlip3/qr.png"
           },
           {
             color: "#c2b1d7",
             image: "./assets/samsungZFlip3/Zflip3_Lavender.png",
-            model: "./assets/samsungZFlip3/Zflip3_Lavender.glb",
+            model: "./assets/samsungZFlip3/Zflip3_Lavender_Animated.glb",
             webLink: "https://www.samsung.com/in/smartphones/galaxy-z-flip/",
             qrLink: "./assets/samsungZFlip3/qr.png"
           },
