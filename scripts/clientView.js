@@ -1350,7 +1350,7 @@ function showModel(item) {
           //Add text to dynamic texture
           var font = "bold 33px monospace";
           textureGround.drawText(
-            "   Scan to explore more",
+            "  Scan to explore in AR",
             5,
             100,
             font,
