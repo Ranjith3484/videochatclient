@@ -844,7 +844,8 @@ function changeVariant(item) {
   localStorage.setItem("showingDeviceWebLink", details.webLink);
   localStorage.setItem("showingDeviceModel", details.model);
   localStorage.setItem("showingDeviceQRLink", details.qrLink);
-
+  document.getElementsByClassName("sideFeaturesContainer")[0].style.display =
+  "block";
   var i, tablinks;
   tablinks = document.getElementsByClassName("colorVariant");
   for (i of tablinks) {
