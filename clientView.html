@@ -12,10 +12,11 @@
   <script src="https://cdn.babylonjs.com/babylon.js"></script>
   <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
   <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
-<body onload="init()">
+  <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
 
   <div>
     <div>
+      <!-- side nave menu bar -->
     <div class="sideNavContainer">
       <div class="tabOuter" onclick="openSideBarAndTab(event,'apps')">
         <a class="notification">
@@ -23,22 +24,23 @@
         </a>
       </div>
     </div>
+    <!-- side nav container -->
     <div id="mySidenav" class="sidenav hideElement">
       <div class="sideNavCloseIcon" onclick="openCloseNav()">
         <i class="fa fa-close icon grey"></i>
       </div>
+      <!-- side nave header tabs -->
       <div class="sideNavHeader">
         <div class="tabLinks activeBorderBlue" onclick="openTab(event, 'people')" id="peopleTabLink">
           <a class="notification">
             <i class="fa fa-user-o icon" id="peopleTabIcon"></i>
-            <span class="badge">3</span>
+            <span class="badge">2</span>
           </a>
           <p class="iconText" id="peopleTabText">PEOPLE</p>
         </div>
         <div class="tabLinks" onclick="openTab(event, 'chat')" id="chatTabLink">
           <a class="notification">
             <i class="fa fa-comment-o icon" id="chatTabIcon"></i>
-            <span class="badge">1</span>
           </a>
           <p class="iconText" id="chatTabText">CHAT</p>
         </div>
@@ -88,6 +90,22 @@
             <tbody>
               <tr>
                 <th>
+                  <h5>Name :</h5>
+                </th>
+                <th>
+                  <p id="customerNameInside"></p>
+                </th>
+              </tr>
+              <tr>
+                <th>
+                  <h5>Callback number:</h5>
+                </th>
+                <th>
+                  <p id="customerContact"></p>
+                </th>
+              </tr>
+              <tr>
+                <th>
                   <h5>Verizon customer since :</h5>
                 </th>
                 <th>
@@ -113,7 +131,15 @@
                   <h5>Devices :</h5>
                 </th>
                 <th>
-                  <p>December 2005</p>
+                  <p>iPhone6, Apple Watch</p>
+                </th>
+              </tr>
+              <tr>
+                <th>
+                  <h5>Reason:</h5>
+                </th>
+                <th>
+                  <p id="callReason"></p>
                 </th>
               </tr>
               <tr>
@@ -126,7 +152,7 @@
               </tr>
               <tr>
                 <th>
-                  <h5>Reason :</h5>
+                  <h5>Last call reason :</h5>
                 </th>
                 <th>
                   <p>Internet not working.</p>
@@ -158,19 +184,24 @@
         <div id="accessories" class="textTabContent">
           <p>accessories</p>
         </div>
+        <!-- purposely hide to manually triggger an event to dispose the model -->
+        <button id="refreshModel" style="display: none;">Refresh Model</button>
       </div>
       <div id="settings" class="tabContent">
         <p>settings</p>
       </div>
     </div>
+    <!-- features container opener -->
     <div class="sideFeaturesContainer" onclick="openCloseFeatures()" id="sideFeaturesOpener">
       <div class="featureButton">
         <i class="fa fa-chevron-left featureIcon"></i>
       </div>
     </div>
+    <!-- features container -->
     <div id="myFeaturesHolder" class="featuresHolder hideElement">
       <div class="featuresRow">
         <div class="featuresLargeColumn">
+          <!-- features holder -->
          <div class="featuresContent" id="camera">
           <div class="featuresText" id="showFrontCamera" onclick="showDeviceFeature('FrontCamera')">Front Camera</div>
           <div class="featuresText" id="showBackCamera" onclick="showDeviceFeature('BackCamera')">Back Camera</div>
@@ -187,9 +218,10 @@
         </div>
           <div class="borderFeature"></div>
          </div>
+         <!-- features tab icon -->
           <div class="featuresTabHolder">
              <i class="fa fa-camera featureTabIcon activeFeature" onclick="openFeatureTab(event, 'camera')" id="cameraFeatures"></i>
-             <i class="fa fa-pencil featureTabIcon" onclick="openFeatureTab(event, 'annotate')"></i>
+             <!-- <i class="fa fa-pencil featureTabIcon" onclick="openFeatureTab(event, 'annotate')"></i> -->
           </div>
         </div>
         <div class="featuresSmallColumn">
@@ -198,6 +230,7 @@
       </div>
     </div>
     </div>
+    <!-- video chat container -->
     <div class="container">
       <!-- self-view -->
       <div class="clientCover">
@@ -206,7 +239,13 @@
       <div class="customerContainer">
         <!-- remote view -->
         <div class="hideInMobile">
-          <video autoplay="true" id="customerVideoElement"></video>
+          <video autoplay="true" id="customerVideoElement" poster="./assets/unknown-person.jpeg"></video>
+          <img src="assets/unknown-person.jpeg" id="customerImageElement"/>
+          <div class="top-right">
+            <i class="fa fa-microphone remoteAudioUnMutedIcon" style="display: none;"></i>
+            <i class="fa fa-microphone-slash remoteAudioMutedIcon" style="display: none;"></i>
+          </div>
+          <div class="overlayName" id="customerName"></div>
         </div>
         <div class="clientControls" >
           <div class="iconCircle active" id="myMic" onclick="audioChange()">

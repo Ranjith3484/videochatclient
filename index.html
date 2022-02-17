@@ -41,10 +41,10 @@
         <div class="addSpace"></div>
         <u>Change location</u>
         <div class="addSpace"></div>
-        <i class="fa fa-video-camera actionLink" id="iconSize" onclick="openCloseVideoCallForm()">
+        <!-- <i class="fa fa-video-camera actionLink" id="iconSize" onclick="openCloseVideoCallForm()">
           <u style="font-weight: bold;padding-left: 5px;
           font-family: verizonBoldFont;">Start a video call with in-store rep</u>
-        </i>
+        </i> -->
         <div class="addSpace"></div>
         <div class="spaceBetween">
           <h5>Today:</h5>
@@ -88,7 +88,8 @@
     <!-- googel map column -->
     <div class="innerColumn">
       <div class="mapContainer">
-        <div id="googleMap" class="googleMap"></div>
+        <!-- <div id="googleMap" class="googleMap"></div> -->
+        <img src="./assets/googleMap.png" class="googleMapImage"/>  
       </div>
     </div>
     <!-- other links column -->
@@ -117,76 +118,6 @@
           You may be required to wear a
           mask even if you are fully vaccinated.
         </h5>
-      </div>
-    </div>
-  </div>
-
-  <!-- open video call request form -->
-  <div class="openVideoCallForm hideElement" id="openVideoCallForm">
-    <img src="./assets/verizon-logo.png" class="logoImage hideInMobile" />
-    <div class="alignCenter">
-      <h1 class="white">Please add a few details. You may be connected to another store for
-        faster service. Don't worry, you can see us but we can't see you.
-      </h1>
-      </br>
-      <div class="addSpace"></div>
-      <form onsubmit="submitForm(event)">
-        <input value="" placeholder="Your name" required id="callRequesterName" />
-        <input type="text" value="" pattern="[0-9]+" placeholder="Callback number" required id="callRequesterNumber"
-          maxlength="10" minlength="10" onkeypress="return onlyNumberKey(event)" />
-        <select placeholder="Reason for video call" required id="callRequestReason">
-          <option value="" disabled selected hidden>Reason for video call</option>
-          <option value="Inquire about new phone">Inquire about new phone</option>
-        </select>
-        <button class="submitButton">Connect</button>
-      </form>
-      <div class="addSpace"></div>
-      <p>*Video calls will use data allotment if connected to cellular data. Standard data rates
-        accoring to your cellular plan apply.
-      </p>
-    </div>
-  </div>
-
-  <!-- loading screen -->
-  <div class="loadingContainer hideElement" id="openLoadingScreen">
-    <div>
-      <h2 class="loadingHeader">Creating secure connection</h2>
-      <div class="loadingContain">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </div>
-
-  <!-- customer view video call -->
-  <div class="customerViewContainer hideElement" id="customerViewContainer">
-    <img src="./assets/verizon-logo.png" class="customerViewLogoImage hideInMobile" />
-    <div class="customerViewRow">
-      <div class="customerViewColumnLarge">
-        <div class="customerViewClientContainer">
-          <video autoplay="true" id="customerViewClientVideoElement"></video>
-        </div>
-      </div>
-      <div class="customerViewColumnSmall">
-        <div class="customerViewIconCircle customerViewActive" id="myMic" onclick="audioChange()">
-          <i class="fa fa-microphone customerViewIcon"></i>
-        </div>
-        <div class="customerViewIconCircle customerViewActive" id="myVideo" onclick="videoChange()">
-          <i class="fa fa-video-camera customerViewIcon"></i>
-        </div>
-        <div class="customerViewIconCircle customerViewInactive" id="endVideoCall" onclick="endVideoCall()">
-          <i class="fa fa-times customerViewIcon"></i>
-        </div>
-      </div>
-    </div>
-    <div class="customerViewCustomerContainer">
-      <video autoplay="true" id="customerViewCustomerVideoElement"></video>
-      <div id="imageElement" class="hideElement">
-        <img src="./assets/unknown-person.jpeg" class="customerViewCustomerImage" />
-        <div class="overlayName">Jacob</div>
       </div>
     </div>
   </div>
@@ -222,18 +153,42 @@
     </div>
   </div>
 
-  <script src="./scripts/index.js"></script>
   <!-- google map api -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=&callback=myMap" async defer></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=&callback=myMap" async defer></script> -->
+  <script>
+    //google map
+function myMap() {
+  var mapProp = {
+    center: new google.maps.LatLng(11.0168, 76.9558),
+    disableDefaultUI: true,
+    fullscreenControl: false,
+    zoom: 5,
+    zoomControl: true,
+    zoomControlOptions: {
+      position: google.maps.ControlPosition.TOP_LEFT,
+      style: google.maps.ZoomControlStyle.HORIZONTAL_BAR,
+    },
+    mapTypeControl: true,
+    mapTypeControlOptions: {
+      style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+      mapTypeIds: ["roadmap", "terrain"],
+    },
+  };
+
+  var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+  var transitLayer = new google.maps.TransitLayer();
+  transitLayer.setMap(map);
+}
+  </script>
 
   <!-- incoming call -->
   <script>
-
+    
     //show call popup ,after 5 seconds
     setTimeout(function () {
       document.getElementById("incomingCallModal").style.display = "initial";
       startCallAcceptingTimer();
-    }, 3000);
+    }, 4000);
 
     //timer for closing call popup
     function startCallAcceptingTimer() {

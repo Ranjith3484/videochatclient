@@ -182,7 +182,8 @@
     .incomingCallContainer{
         width: 100%;
         background-color: white;
-        overflow: scroll;
+       /* overflow: scroll; */
+  overflow: auto;
         -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0);
         border:0px;
         height: 100%;
